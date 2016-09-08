@@ -1,25 +1,137 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="34c-H7-OOy">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Navigation Controller-->
+        <scene sceneID="aSz-HJ-OU2">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                <navigationController id="34c-H7-OOy" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="QJA-Jp-Kjz">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="2GN-Ij-us7" kind="relationship" relationship="rootViewController" id="y0Y-j5-WfC"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ahU-cO-xep" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1707" y="710"/>
+        </scene>
+        <!--Artists List-->
+        <scene sceneID="Fxi-Lx-TjG">
+            <objects>
+                <collectionViewController title="Artists List" id="2GN-Ij-us7" customClass="ArtistsListViewController" customModule="awtarika" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="JIK-qd-iJb">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="A0B-ko-I2l">
+                            <size key="itemSize" width="100" height="120"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ArtistsCell" id="l8W-yO-grN" customClass="ArtistsCollectionViewCell" customModule="awtarika" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="64" width="100" height="120"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="100" height="120"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="YmZ-69-SLP">
+                                            <rect key="frame" x="8" y="94" width="84" height="18"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="18" id="BEf-BX-0dM"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sHx-OT-Kxd">
+                                            <rect key="frame" x="14" y="15" width="72" height="72"/>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="YmZ-69-SLP" firstAttribute="top" secondItem="sHx-OT-Kxd" secondAttribute="bottom" constant="7" id="56x-MF-h2g"/>
+                                    <constraint firstItem="YmZ-69-SLP" firstAttribute="leading" secondItem="l8W-yO-grN" secondAttribute="leadingMargin" id="5Mi-H7-SrM"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="sHx-OT-Kxd" secondAttribute="trailing" constant="6" id="9jJ-QV-KeH"/>
+                                    <constraint firstItem="YmZ-69-SLP" firstAttribute="centerX" secondItem="l8W-yO-grN" secondAttribute="centerX" id="IfO-D4-26v"/>
+                                    <constraint firstItem="sHx-OT-Kxd" firstAttribute="top" secondItem="l8W-yO-grN" secondAttribute="topMargin" constant="7" id="LeB-qP-Alw"/>
+                                    <constraint firstItem="YmZ-69-SLP" firstAttribute="bottom" secondItem="l8W-yO-grN" secondAttribute="bottomMargin" id="jg0-O6-Zpp"/>
+                                    <constraint firstItem="sHx-OT-Kxd" firstAttribute="centerX" secondItem="l8W-yO-grN" secondAttribute="centerX" id="ueN-Tp-s7P"/>
+                                    <constraint firstItem="sHx-OT-Kxd" firstAttribute="leading" secondItem="l8W-yO-grN" secondAttribute="leadingMargin" constant="6" id="zSD-CC-eWq"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="image" destination="sHx-OT-Kxd" id="Cz2-8p-QFa"/>
+                                    <outlet property="name" destination="YmZ-69-SLP" id="ubM-9U-BHM"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="2GN-Ij-us7" id="5aJ-OV-VJ6"/>
+                            <outlet property="delegate" destination="2GN-Ij-us7" id="w3a-LA-PaT"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" title="المطربين" id="Url-xL-jcI"/>
+                    <connections>
+                        <outlet property="flowLayout" destination="A0B-ko-I2l" id="6F7-Vu-96K"/>
+                        <segue destination="CEa-TL-3fn" kind="show" identifier="ShowArtist" id="rne-vn-Oub"/>
+                    </connections>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lrN-nU-Ban" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-691" y="711"/>
+        </scene>
+        <!--Artist-->
+        <scene sceneID="9SB-aj-jHz">
+            <objects>
+                <tableViewController storyboardIdentifier="ArtistView" title="Artist" id="CEa-TL-3fn" customClass="ArtistViewController" customModule="awtarika" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="mf9-MF-tUD">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SongCell" id="epx-xs-RHO" customClass="SongTableViewCell" customModule="awtarika" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="epx-xs-RHO" id="MyW-Bj-xWR">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="piy-6E-dH7">
+                                            <rect key="frame" x="550" y="11" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="piy-6E-dH7" firstAttribute="centerY" secondItem="MyW-Bj-xWR" secondAttribute="centerY" id="Cc0-Sc-fUo"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="piy-6E-dH7" secondAttribute="trailing" id="kJd-70-UUK"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="Title" destination="piy-6E-dH7" id="c5c-8z-ZYV"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="CEa-TL-3fn" id="G7v-MN-m4s"/>
+                            <outlet property="delegate" destination="CEa-TL-3fn" id="OCI-Ri-FrO"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Artist" id="nKn-hy-ieq"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UCS-Ed-rPw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="294" y="710"/>
         </scene>
     </scenes>
 </document>

@@ -7,13 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A3FCD44152C2C3B1E91A84A /* Pods_awtarika.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FD67ACDF1646C48184A4E1E /* Pods_awtarika.framework */; };
 		E40B54E11CBC709800A2F414 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40B54E01CBC709800A2F414 /* AppDelegate.swift */; };
-		E40B54E31CBC709800A2F414 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40B54E21CBC709800A2F414 /* ViewController.swift */; };
 		E40B54E61CBC709800A2F414 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E40B54E41CBC709800A2F414 /* Main.storyboard */; };
 		E40B54E81CBC709800A2F414 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E40B54E71CBC709800A2F414 /* Assets.xcassets */; };
 		E40B54EB1CBC709800A2F414 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E40B54E91CBC709800A2F414 /* LaunchScreen.storyboard */; };
 		E40B54F61CBC709800A2F414 /* awtarikaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40B54F51CBC709800A2F414 /* awtarikaTests.swift */; };
 		E40B55011CBC709800A2F414 /* awtarikaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40B55001CBC709800A2F414 /* awtarikaUITests.swift */; };
+		E40B55111CBCB15E00A2F414 /* ArtistsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40B55101CBCB15E00A2F414 /* ArtistsListViewController.swift */; };
+		E40B55131CBF264300A2F414 /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40B55121CBF264300A2F414 /* Artist.swift */; };
+		E40B55191CBF94DD00A2F414 /* ArtistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40B55181CBF94DD00A2F414 /* ArtistViewController.swift */; };
+		E4608B0C1D7CF4E900AA65A9 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = E4608B0B1D7CF4E900AA65A9 /* Podfile */; };
+		E4608B0E1D7CFF6800AA65A9 /* PhotosDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4608B0D1D7CFF6800AA65A9 /* PhotosDataManager.swift */; };
+		E46DA3151D751977001D4EBC /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46DA3141D751977001D4EBC /* Song.swift */; };
+		E46DA3171D752265001D4EBC /* SongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46DA3161D752265001D4EBC /* SongTableViewCell.swift */; };
+		E49E535D1D6A85AF000472F8 /* ArtistsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49E535C1D6A85AF000472F8 /* ArtistsCollectionViewCell.swift */; };
+		E49E53621D6FBCFB000472F8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49E53611D6FBCFB000472F8 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,9 +43,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3EFEC21EA20089078BD49B97 /* Pods-awtarika.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-awtarika.debug.xcconfig"; path = "Pods/Target Support Files/Pods-awtarika/Pods-awtarika.debug.xcconfig"; sourceTree = "<group>"; };
+		4FD67ACDF1646C48184A4E1E /* Pods_awtarika.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_awtarika.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DEAF1DA3412B74D6CD7864F5 /* Pods-awtarika.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-awtarika.release.xcconfig"; path = "Pods/Target Support Files/Pods-awtarika/Pods-awtarika.release.xcconfig"; sourceTree = "<group>"; };
 		E40B54DD1CBC709800A2F414 /* awtarika.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = awtarika.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E40B54E01CBC709800A2F414 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E40B54E21CBC709800A2F414 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E40B54E51CBC709800A2F414 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E40B54E71CBC709800A2F414 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E40B54EA1CBC709800A2F414 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +58,15 @@
 		E40B54FC1CBC709800A2F414 /* awtarikaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = awtarikaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E40B55001CBC709800A2F414 /* awtarikaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = awtarikaUITests.swift; sourceTree = "<group>"; };
 		E40B55021CBC709800A2F414 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E40B55101CBCB15E00A2F414 /* ArtistsListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistsListViewController.swift; sourceTree = "<group>"; };
+		E40B55121CBF264300A2F414 /* Artist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
+		E40B55181CBF94DD00A2F414 /* ArtistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistViewController.swift; sourceTree = "<group>"; };
+		E4608B0B1D7CF4E900AA65A9 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		E4608B0D1D7CFF6800AA65A9 /* PhotosDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosDataManager.swift; sourceTree = "<group>"; };
+		E46DA3141D751977001D4EBC /* Song.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
+		E46DA3161D752265001D4EBC /* SongTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongTableViewCell.swift; sourceTree = "<group>"; };
+		E49E535C1D6A85AF000472F8 /* ArtistsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistsCollectionViewCell.swift; sourceTree = "<group>"; };
+		E49E53611D6FBCFB000472F8 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A3FCD44152C2C3B1E91A84A /* Pods_awtarika.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,13 +95,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1D216C64728C39A1E5DA9035 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3EFEC21EA20089078BD49B97 /* Pods-awtarika.debug.xcconfig */,
+				DEAF1DA3412B74D6CD7864F5 /* Pods-awtarika.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		42C99CD5AA7E71489034A6B5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4FD67ACDF1646C48184A4E1E /* Pods_awtarika.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E40B54D41CBC709800A2F414 = {
 			isa = PBXGroup;
 			children = (
+				E4608B0B1D7CF4E900AA65A9 /* Podfile */,
 				E40B54DF1CBC709800A2F414 /* awtarika */,
 				E40B54F41CBC709800A2F414 /* awtarikaTests */,
 				E40B54FF1CBC709800A2F414 /* awtarikaUITests */,
 				E40B54DE1CBC709800A2F414 /* Products */,
+				1D216C64728C39A1E5DA9035 /* Pods */,
+				42C99CD5AA7E71489034A6B5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -98,11 +139,18 @@
 			isa = PBXGroup;
 			children = (
 				E40B54E01CBC709800A2F414 /* AppDelegate.swift */,
-				E40B54E21CBC709800A2F414 /* ViewController.swift */,
+				E40B55121CBF264300A2F414 /* Artist.swift */,
+				E46DA3141D751977001D4EBC /* Song.swift */,
 				E40B54E41CBC709800A2F414 /* Main.storyboard */,
+				E40B55101CBCB15E00A2F414 /* ArtistsListViewController.swift */,
+				E49E535C1D6A85AF000472F8 /* ArtistsCollectionViewCell.swift */,
+				E40B55181CBF94DD00A2F414 /* ArtistViewController.swift */,
+				E46DA3161D752265001D4EBC /* SongTableViewCell.swift */,
 				E40B54E71CBC709800A2F414 /* Assets.xcassets */,
 				E40B54E91CBC709800A2F414 /* LaunchScreen.storyboard */,
 				E40B54EC1CBC709800A2F414 /* Info.plist */,
+				E4608B0D1D7CFF6800AA65A9 /* PhotosDataManager.swift */,
+				E49E53611D6FBCFB000472F8 /* Constants.swift */,
 			);
 			path = awtarika;
 			sourceTree = "<group>";
@@ -132,9 +180,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E40B55051CBC709800A2F414 /* Build configuration list for PBXNativeTarget "awtarika" */;
 			buildPhases = (
+				2E9FC275ACF2F8CCB369B7F6 /* [CP] Check Pods Manifest.lock */,
 				E40B54D91CBC709800A2F414 /* Sources */,
 				E40B54DA1CBC709800A2F414 /* Frameworks */,
 				E40B54DB1CBC709800A2F414 /* Resources */,
+				C945547C521E91F23D80D767 /* [CP] Embed Pods Frameworks */,
+				88805C36223973A30D33D1B9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -193,6 +244,7 @@
 				TargetAttributes = {
 					E40B54DC1CBC709800A2F414 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = KE252LHREX;
 					};
 					E40B54F01CBC709800A2F414 = {
 						CreatedOnToolsVersion = 7.3;
@@ -231,6 +283,7 @@
 			files = (
 				E40B54EB1CBC709800A2F414 /* LaunchScreen.storyboard in Resources */,
 				E40B54E81CBC709800A2F414 /* Assets.xcassets in Resources */,
+				E4608B0C1D7CF4E900AA65A9 /* Podfile in Resources */,
 				E40B54E61CBC709800A2F414 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -251,12 +304,67 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2E9FC275ACF2F8CCB369B7F6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		88805C36223973A30D33D1B9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-awtarika/Pods-awtarika-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C945547C521E91F23D80D767 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-awtarika/Pods-awtarika-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E40B54D91CBC709800A2F414 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E40B54E31CBC709800A2F414 /* ViewController.swift in Sources */,
+				E40B55111CBCB15E00A2F414 /* ArtistsListViewController.swift in Sources */,
+				E40B55131CBF264300A2F414 /* Artist.swift in Sources */,
+				E49E535D1D6A85AF000472F8 /* ArtistsCollectionViewCell.swift in Sources */,
+				E46DA3171D752265001D4EBC /* SongTableViewCell.swift in Sources */,
+				E40B55191CBF94DD00A2F414 /* ArtistViewController.swift in Sources */,
+				E46DA3151D751977001D4EBC /* Song.swift in Sources */,
+				E4608B0E1D7CFF6800AA65A9 /* PhotosDataManager.swift in Sources */,
+				E49E53621D6FBCFB000472F8 /* Constants.swift in Sources */,
 				E40B54E11CBC709800A2F414 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -399,23 +507,33 @@
 		};
 		E40B55061CBC709800A2F414 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3EFEC21EA20089078BD49B97 /* Pods-awtarika.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = awtarika/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.anasqadrei.awtarika;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
 		E40B55071CBC709800A2F414 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DEAF1DA3412B74D6CD7864F5 /* Pods-awtarika.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = awtarika/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.anasqadrei.awtarika;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -484,6 +602,7 @@
 				E40B55071CBC709800A2F414 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E40B55081CBC709800A2F414 /* Build configuration list for PBXNativeTarget "awtarikaTests" */ = {
 			isa = XCConfigurationList;
@@ -492,6 +611,7 @@
 				E40B550A1CBC709800A2F414 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E40B550B1CBC709800A2F414 /* Build configuration list for PBXNativeTarget "awtarikaUITests" */ = {
 			isa = XCConfigurationList;
@@ -500,6 +620,7 @@
 				E40B550D1CBC709800A2F414 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

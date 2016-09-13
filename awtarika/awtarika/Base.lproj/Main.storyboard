@@ -114,7 +114,7 @@
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h36-9P-w6H">
                                             <rect key="frame" x="552" y="11" width="40" height="22"/>
-                                            <state key="normal" image="play1"/>
+                                            <state key="normal" image="tablePlay"/>
                                             <connections>
                                                 <action selector="play:" destination="epx-xs-RHO" eventType="touchUpInside" id="Qur-4J-6fl"/>
                                             </connections>
@@ -167,6 +167,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="play1" width="16" height="16"/>
+        <image name="tablePlay" width="16" height="16"/>
     </resources>
 </document>

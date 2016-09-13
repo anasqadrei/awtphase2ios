@@ -11,11 +11,18 @@ import Foundation
 class Song {
     var id: Int?
     var title: String?
+    var artistName: String?
     var durationDesc: String?
-   
+    var playsCount: Int?
+    var likesCount: Int?
+
     init(id: Int, title: String){
         self.id = id
         self.title = title
+        
+        // Defaults
+        playsCount = 0
+        likesCount = 0
     }
     
 }

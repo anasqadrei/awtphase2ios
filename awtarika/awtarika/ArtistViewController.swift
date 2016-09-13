@@ -68,6 +68,19 @@ class ArtistViewController: UITableViewController {
                     
                     // Fill artist data
                     let song = Song(id: id, title: title)
+                    
+                    if let artistName = (parsedSong["artist"] as? [String:AnyObject])!["name"] as? String {
+                        song.artistName = artistName
+                    }
+                    if let durationDesc = parsedSong["durationDesc"] as? String {
+                        song.durationDesc = durationDesc
+                    }
+                    if let playsCount = parsedSong["playsCount"] as? Int {
+                        song.playsCount = playsCount
+                    }
+                    if let likesCount = parsedSong["likesCount"] as? Int {
+                        song.likesCount = likesCount
+                    }
 
                     // Append to self.songsList
                     self.songsList.append(song)
@@ -125,8 +138,8 @@ class ArtistViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("SongCell")! as! SongTableViewCell
 
         // Configure the cell
-        cell.Title.text = self.songsList[indexPath.row].title!
-        
+        cell.configure(self.songsList[indexPath.row])
+      
         // Return
         return cell
     }

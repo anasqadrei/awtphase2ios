@@ -13,7 +13,7 @@ class SongViewController: UIViewController {
 
     @IBOutlet weak var songTitle: UILabel!
     @IBOutlet weak var artistName: UILabel!
-    @IBOutlet weak var playPauseButton: UIButton!
+    @IBOutlet weak var playerButton: UIButton!
     @IBOutlet weak var songDescription: UILabel!
     @IBOutlet weak var songImage: UIImageView!
     @IBOutlet weak var playsCount: UILabel!
@@ -65,8 +65,9 @@ class SongViewController: UIViewController {
         }
     }
     
-    @IBAction func playPause(sender: AnyObject) {
-        print("playing or pausing")
+    @IBAction func showPlayer(sender: AnyObject) {
+        let popupContentVC = storyboard?.instantiateViewControllerWithIdentifier("PlayerViewController") as! PlayerViewController
+        navigationController?.presentPopupBarWithContentViewController(popupContentVC, animated: true, completion: nil)
     }
     
 }

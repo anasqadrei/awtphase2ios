@@ -165,6 +165,42 @@
             </objects>
             <point key="canvasLocation" x="-49" y="710"/>
         </scene>
+        <!--Player-->
+        <scene sceneID="4uu-Ta-JZL">
+            <objects>
+                <viewController storyboardIdentifier="PlayerViewController" title="Player" id="xpj-SI-yAZ" customClass="PlayerViewController" customModule="awtarika" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qtb-Mw-BTK"/>
+                        <viewControllerLayoutGuide type="bottom" id="kKf-rX-xuD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PE4-TN-KcR">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ari-rc-bkL">
+                                <rect key="frame" x="263" y="285" width="75" height="30"/>
+                                <state key="normal" title="Play Pause"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qSc-iH-ohi">
+                                <rect key="frame" x="286" y="28" width="29" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="qSc-iH-ohi" firstAttribute="top" secondItem="qtb-Mw-BTK" secondAttribute="bottom" constant="8" id="7ej-eL-pHJ"/>
+                            <constraint firstItem="Ari-rc-bkL" firstAttribute="centerY" secondItem="PE4-TN-KcR" secondAttribute="centerY" id="eZi-aM-0OQ"/>
+                            <constraint firstItem="Ari-rc-bkL" firstAttribute="centerX" secondItem="PE4-TN-KcR" secondAttribute="centerX" id="g5J-7C-9An"/>
+                            <constraint firstItem="qSc-iH-ohi" firstAttribute="centerX" secondItem="PE4-TN-KcR" secondAttribute="centerX" id="hdf-Je-GI9"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qkx-Hl-c3a" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-27" y="1572"/>
+        </scene>
         <!--Song-->
         <scene sceneID="9o5-SC-4g5">
             <objects>
@@ -206,7 +242,7 @@
                                 <rect key="frame" x="285" y="130" width="30" height="30"/>
                                 <state key="normal" title="Play"/>
                                 <connections>
-                                    <action selector="playPause:" destination="LWi-xi-AXq" eventType="touchUpInside" id="SRO-Hr-kh8"/>
+                                    <action selector="showPlayer:" destination="LWi-xi-AXq" eventType="touchUpInside" id="ZLH-Si-xZC"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Likes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xrf-VE-uBx">
@@ -246,7 +282,7 @@
                     <connections>
                         <outlet property="artistName" destination="9TS-bH-vxu" id="KhD-sq-Vgn"/>
                         <outlet property="likesCount" destination="xrf-VE-uBx" id="I4V-Ju-0AB"/>
-                        <outlet property="playPauseButton" destination="Hjo-Au-D5s" id="ckF-XF-LQG"/>
+                        <outlet property="playerButton" destination="Hjo-Au-D5s" id="s7T-YI-rHq"/>
                         <outlet property="playsCount" destination="KNm-JB-OGI" id="RJQ-yw-2Wp"/>
                         <outlet property="songDescription" destination="bKp-ed-aL9" id="1yz-f8-Zke"/>
                         <outlet property="songImage" destination="Das-HU-Guk" id="Xg6-CI-gRX"/>

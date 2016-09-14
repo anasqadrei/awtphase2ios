@@ -19,6 +19,10 @@
 		E4608B0C1D7CF4E900AA65A9 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = E4608B0B1D7CF4E900AA65A9 /* Podfile */; };
 		E4608B0E1D7CFF6800AA65A9 /* PhotosDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4608B0D1D7CFF6800AA65A9 /* PhotosDataManager.swift */; };
 		E4608B111D87FBA900AA65A9 /* SongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4608B101D87FBA800AA65A9 /* SongViewController.swift */; };
+		E4608B131D88DB2E00AA65A9 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = E4608B121D88DB2E00AA65A9 /* Cartfile */; };
+		E4608B151D88DD5200AA65A9 /* LNPopupController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4608B141D88DD5200AA65A9 /* LNPopupController.framework */; };
+		E4608B181D88E00D00AA65A9 /* Cartfile.resolved in Resources */ = {isa = PBXBuildFile; fileRef = E4608B171D88E00D00AA65A9 /* Cartfile.resolved */; };
+		E4608B1A1D88E34500AA65A9 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4608B191D88E34500AA65A9 /* PlayerViewController.swift */; };
 		E46DA3151D751977001D4EBC /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46DA3141D751977001D4EBC /* Song.swift */; };
 		E46DA3171D752265001D4EBC /* SongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46DA3161D752265001D4EBC /* SongTableViewCell.swift */; };
 		E49E535D1D6A85AF000472F8 /* ArtistsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49E535C1D6A85AF000472F8 /* ArtistsCollectionViewCell.swift */; };
@@ -63,6 +67,10 @@
 		E4608B0B1D7CF4E900AA65A9 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E4608B0D1D7CFF6800AA65A9 /* PhotosDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosDataManager.swift; sourceTree = "<group>"; };
 		E4608B101D87FBA800AA65A9 /* SongViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongViewController.swift; sourceTree = "<group>"; };
+		E4608B121D88DB2E00AA65A9 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
+		E4608B141D88DD5200AA65A9 /* LNPopupController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LNPopupController.framework; path = Carthage/Build/iOS/LNPopupController.framework; sourceTree = "<group>"; };
+		E4608B171D88E00D00AA65A9 /* Cartfile.resolved */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile.resolved; sourceTree = "<group>"; };
+		E4608B191D88E34500AA65A9 /* PlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		E46DA3141D751977001D4EBC /* Song.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
 		E46DA3161D752265001D4EBC /* SongTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongTableViewCell.swift; sourceTree = "<group>"; };
 		E49E535C1D6A85AF000472F8 /* ArtistsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistsCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -74,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4608B151D88DD5200AA65A9 /* LNPopupController.framework in Frameworks */,
 				6A3FCD44152C2C3B1E91A84A /* Pods_awtarika.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -107,6 +116,7 @@
 		42C99CD5AA7E71489034A6B5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E4608B141D88DD5200AA65A9 /* LNPopupController.framework */,
 				4FD67ACDF1646C48184A4E1E /* Pods_awtarika.framework */,
 			);
 			name = Frameworks;
@@ -115,6 +125,8 @@
 		E40B54D41CBC709800A2F414 = {
 			isa = PBXGroup;
 			children = (
+				E4608B121D88DB2E00AA65A9 /* Cartfile */,
+				E4608B171D88E00D00AA65A9 /* Cartfile.resolved */,
 				E4608B0B1D7CF4E900AA65A9 /* Podfile */,
 				E40B54DF1CBC709800A2F414 /* awtarika */,
 				E40B54F41CBC709800A2F414 /* awtarikaTests */,
@@ -147,6 +159,7 @@
 				E40B55181CBF94DD00A2F414 /* ArtistViewController.swift */,
 				E46DA3161D752265001D4EBC /* SongTableViewCell.swift */,
 				E4608B101D87FBA800AA65A9 /* SongViewController.swift */,
+				E4608B191D88E34500AA65A9 /* PlayerViewController.swift */,
 				E40B54E71CBC709800A2F414 /* Assets.xcassets */,
 				E40B54EC1CBC709800A2F414 /* Info.plist */,
 				E4608B0D1D7CFF6800AA65A9 /* PhotosDataManager.swift */,
@@ -186,6 +199,7 @@
 				E40B54DB1CBC709800A2F414 /* Resources */,
 				C945547C521E91F23D80D767 /* [CP] Embed Pods Frameworks */,
 				88805C36223973A30D33D1B9 /* [CP] Copy Pods Resources */,
+				E4608B161D88DD8300AA65A9 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -283,6 +297,8 @@
 			files = (
 				E40B54E81CBC709800A2F414 /* Assets.xcassets in Resources */,
 				E4608B0C1D7CF4E900AA65A9 /* Podfile in Resources */,
+				E4608B131D88DB2E00AA65A9 /* Cartfile in Resources */,
+				E4608B181D88E00D00AA65A9 /* Cartfile.resolved in Resources */,
 				E40B54E61CBC709800A2F414 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -349,6 +365,20 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-awtarika/Pods-awtarika-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		E4608B161D88DD8300AA65A9 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/LNPopupController.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -365,6 +395,7 @@
 				E4608B0E1D7CFF6800AA65A9 /* PhotosDataManager.swift in Sources */,
 				E4608B111D87FBA900AA65A9 /* SongViewController.swift in Sources */,
 				E49E53621D6FBCFB000472F8 /* Constants.swift in Sources */,
+				E4608B1A1D88E34500AA65A9 /* PlayerViewController.swift in Sources */,
 				E40B54E11CBC709800A2F414 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -504,6 +535,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = awtarika/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -520,6 +555,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = awtarika/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

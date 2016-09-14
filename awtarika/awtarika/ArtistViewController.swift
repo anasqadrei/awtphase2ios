@@ -66,11 +66,17 @@ class ArtistViewController: UITableViewController {
                         continue
                     }
                     
-                    // Fill artist data
+                    // Fill song data
                     let song = Song(id: id, title: title)
                     
                     if let artistName = (parsedSong["artist"] as? [String:AnyObject])!["name"] as? String {
                         song.artistName = artistName
+                    }
+                    if let desc = parsedSong["desc"] as? String {
+                        song.description = desc
+                    }
+                    if let imageURL = parsedSong["image"] as? String {
+                        song.imageURL = imageURL
                     }
                     if let durationDesc = parsedSong["durationDesc"] as? String {
                         song.durationDesc = durationDesc
@@ -144,6 +150,13 @@ class ArtistViewController: UITableViewController {
         return cell
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Assign the song of the destination VC
+        if segue.identifier == "Song", let songCell = sender as! SongTableViewCell? {
+            let songVC = segue.destinationViewController as! SongViewController
+            songVC.song = songCell.song
+        }
+    }
 }
 
     

@@ -149,10 +149,11 @@ class ArtistsListViewController: UICollectionViewController {
         return cell
     }
 
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        // Navigate to artist view controller
-        let artistVC = self.storyboard!.instantiateViewControllerWithIdentifier("ArtistView") as! ArtistViewController
-        artistVC.artist = self.artistsList[indexPath.row]
-        self.navigationController!.pushViewController(artistVC, animated: true)
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Assign the artist of the destination VC
+        if segue.identifier == "Artist", let artistCell = sender as! ArtistsCollectionViewCell? {
+            let artistVC = segue.destinationViewController as! ArtistViewController
+            artistVC.artist = artistCell.artist
+        }
     }
 }

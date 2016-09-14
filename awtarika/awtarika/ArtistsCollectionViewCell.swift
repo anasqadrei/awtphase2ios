@@ -35,7 +35,7 @@ class ArtistsCollectionViewCell: UICollectionViewCell {
         // First set the artist name
         self.name.text = self.artist.name!
 
-        // GUARD: Does artist has an image?
+        // GUARD: Does artist have an image?
         guard let imageURL = self.artist.imageURL else {
             return
         }

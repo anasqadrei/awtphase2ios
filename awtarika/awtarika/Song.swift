@@ -12,6 +12,8 @@ class Song {
     var id: Int?
     var title: String?
     var artistName: String?
+    var description: String?
+    var imageURL: String?
     var durationDesc: String?
     var playsCount: Int?
     var likesCount: Int?

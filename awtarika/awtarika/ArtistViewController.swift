@@ -98,7 +98,7 @@ class ArtistViewController: UITableViewController {
                 // Reload data and finish
                 self.tableView?.reloadData()
                 self.configureUI(false)
-        }
+            }
     }
     
     override func viewDidLoad() {

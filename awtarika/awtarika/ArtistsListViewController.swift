@@ -89,7 +89,7 @@ class ArtistsListViewController: UICollectionViewController {
                 // Reload data and finish
                 self.collectionView?.reloadData()
                 self.configureUI(false)
-        }
+            }
     }
     
     override func viewDidLoad() {

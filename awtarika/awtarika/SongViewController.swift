@@ -66,7 +66,10 @@ class SongViewController: UIViewController {
     }
     
     @IBAction func showPlayer(sender: AnyObject) {
+        
+        
         let popupContentVC = storyboard?.instantiateViewControllerWithIdentifier("PlayerViewController") as! PlayerViewController
+        popupContentVC.song = song
         navigationController?.presentPopupBarWithContentViewController(popupContentVC, animated: true, completion: nil)
     }
     

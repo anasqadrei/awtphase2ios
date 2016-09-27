@@ -36,8 +36,8 @@ class SongViewController: UIViewController {
         songTitle.text = song!.title
         artistName.text = song!.artistName
         songDescription.text = song!.description
-        playsCount.text = "\(song!.playsCount!)"
-        likesCount.text = "\(song!.likesCount!)"
+        playsCount.text = "▶️ \(song!.playsCount!)"
+        likesCount.text = "👍 \(song!.likesCount!)"
         
         showImage()
 
@@ -66,8 +66,6 @@ class SongViewController: UIViewController {
     }
     
     @IBAction func showPlayer(sender: AnyObject) {
-        
-        
         let popupContentVC = storyboard?.instantiateViewControllerWithIdentifier("PlayerViewController") as! PlayerViewController
         popupContentVC.song = song
         navigationController?.presentPopupBarWithContentViewController(popupContentVC, animated: true, completion: nil)

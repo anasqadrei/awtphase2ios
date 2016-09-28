@@ -56,11 +56,13 @@ class SongViewController: UIViewController {
         if let image = PhotosDataManager.sharedManager.cachedImage(imageURL) {
             // Then show it
             self.songImage.image = image
+            self.song?.image = image                //update song image??
         } else {
             // Else download image if not cached
             request = PhotosDataManager.sharedManager.getNetworkImage(imageURL) { image in
                 // Show new downloaded image
                 self.songImage.image = image
+                self.song?.image = image
             }
         }
     }

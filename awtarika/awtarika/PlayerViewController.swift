@@ -18,6 +18,7 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
     @IBOutlet weak var songImage: UIImageView!
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var togglePlayPauseButton: UIButton!
+    @IBOutlet weak var volumeSlider: UISlider!
     
     var play: UIBarButtonItem!
     var pause: UIBarButtonItem!
@@ -38,12 +39,14 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
     }
     
     @IBAction func togglePlayPause(sender: AnyObject) {
-        switch togglePlayPauseButton.currentTitle! {
-        case "play":
+
+        //
+        switch audioPlayer.state {
+        case .Stopped, .Paused:
             playSong()
-        case "pause":
+        case .Playing:
             audioPlayer.pause()
-        case "stop":
+        case .Failed(AudioPlayerError.FoundationError(nil)):
             dismissVC()
         default:
             return
@@ -79,12 +82,14 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
         
         if audioPlayer.state == .Paused {
             audioPlayer.resume()
-        } else if audioPlayer.state == .Stopped {
+        } else {
             
             //
             UIApplication.sharedApplication().networkActivityIndicatorVisible = true
             popupItem.leftBarButtonItems = [ spinner ]
             
+            // reset ?
+      
             // Create request
             let url = "\(Constants.URLs.Host)/song/play"
             let parameters = [
@@ -119,6 +124,9 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
                     item?.title = self.song!.title
                     item?.artist = self.song!.artistName
                     self.audioPlayer.playItem(item!)
+                    
+                    //??
+                    self.volumeSlider.value = self.audioPlayer.volume
                 }
         }
     }
@@ -130,6 +138,10 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
 
         songTitleLabel.text = song!.title
         artistNameLabel.text = song!.artistName
+        if let image = song?.image {
+            songImage.image = image
+        }
+        
    
     }
     
@@ -139,13 +151,12 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
     }
     
     func audioPlayer(audioPlayer: AudioPlayer, didChangeStateFrom from: AudioPlayerState, toState to: AudioPlayerState) {
-        print("from \(from) to \(to)")
+//        print("from \(from) to \(to)")
         
         // now buffering
         if to == .Buffering || to == .WaitingForConnection {
             UIApplication.sharedApplication().networkActivityIndicatorVisible = true
             popupItem.leftBarButtonItems = [ spinner ]
-            togglePlayPauseButton.setTitle("loading", forState: .Normal)
         }
         
         // end buffering
@@ -156,19 +167,19 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
         // show play
         if to == .Stopped || to == .Paused {
             popupItem.leftBarButtonItems = [ play ]
-            togglePlayPauseButton.setTitle("play", forState: .Normal)
+            togglePlayPauseButton.setImage(UIImage(named: "playerPlay"), forState: .Normal)
         }
         
         // show pause
         if to == .Playing {
             popupItem.leftBarButtonItems = [ pause ]
-            togglePlayPauseButton.setTitle("pause", forState: .Normal)
+            togglePlayPauseButton.setImage(UIImage(named: "playerPause"), forState: .Normal)
         }
         
         // show stop/error
         if to == .Failed(AudioPlayerError.FoundationError(nil)) {
             popupItem.leftBarButtonItems = [ stop ]
-            togglePlayPauseButton.setTitle("stop", forState: .Normal)
+            togglePlayPauseButton.setImage(UIImage(named: "playerClose"), forState: .Normal)
         }
         
         // dismiss at end
@@ -179,9 +190,15 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
     
     func audioPlayer(audioPlayer: AudioPlayer, didUpdateProgressionToTime time: NSTimeInterval, percentageRead: Float) {
         popupItem.progress = percentageRead/100.0
-        progressView.progress = percentageRead/100.0
+        if isViewLoaded() {
+            progressView.progress = percentageRead/100.0
+        }
     }
 
+    @IBAction func volumeChange(sender: AnyObject) {
+        audioPlayer.volume = volumeSlider.value
+    }
+    
     /*
     // MARK: - Navigation
 

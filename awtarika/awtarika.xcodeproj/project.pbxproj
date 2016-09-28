@@ -262,6 +262,11 @@
 					E40B54DC1CBC709800A2F414 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = KE252LHREX;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					E40B54F01CBC709800A2F414 = {
 						CreatedOnToolsVersion = 7.3;

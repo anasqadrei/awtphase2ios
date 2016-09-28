@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class Song {
     var id: Int?
@@ -14,6 +15,7 @@ class Song {
     var artistName: String?
     var description: String?
     var imageURL: String?
+    var image: UIImage?
     var durationDesc: String?
     var playsCount: Int?
     var likesCount: Int?

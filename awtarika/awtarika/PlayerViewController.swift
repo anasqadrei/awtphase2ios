@@ -40,8 +40,9 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
         super.init(coder: aDecoder)
         
         audioPlayer.delegate = self
-        
+
         LNPopupBar.appearanceWhenContainedInInstancesOfClasses([UINavigationController.self]).barStyle = .Black
+        LNPopupBar.appearanceWhenContainedInInstancesOfClasses([UINavigationController.self]).titleTextAttributes = [NSFontAttributeName: UIFont.systemFontOfSize(16)]
         
         let activityIndicatorView = UIActivityIndicatorView()
         activityIndicatorView.startAnimating()

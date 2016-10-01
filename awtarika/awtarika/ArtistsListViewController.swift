@@ -40,12 +40,12 @@ class ArtistsListViewController: UICollectionViewController {
         flowLayout.itemSize = CGSizeMake(itemWidth, itemHeight)
     }
     
-    // ** Do I really need it?
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
-        // Layout update if size changed
-        collectionView?.collectionViewLayout.invalidateLayout()
-    }
+//    // ** Do I really need it?
+//    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+//        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+//        // Layout update if size changed
+//        collectionView?.collectionViewLayout.invalidateLayout()
+//    }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return artistsList.count

@@ -20,57 +20,66 @@ class SongViewController: UIViewController {
     @IBOutlet weak var likesCount: UILabel!
 
     var request: Request?
-    var song: Song?
+    var song: Song!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        // GUARD: Song ID exists?
-        guard let songId = song?.id else {
-            print("song doesn't exist")
-            return
-        }
         
         // Set VC data
-        songTitle.text = song!.title
-        artistName.text = song!.artistName
-        songDescription.text = song!.description
-        playsCount.text = "▶️ \(song!.playsCount!)"
-        likesCount.text = "👍 \(song!.likesCount!)"
-        
-        showImage()
-
+        songTitle.text = song.title
+        if song.artistName != nil {
+            artistName.text = song.artistName
+        }
+        if song.description != nil {
+            songDescription.text = song.description
+        }
+        playsCount.text = "▶️ \(song.playsCount)"
+        likesCount.text = "👍 \(song.likesCount)"
+        if song.imageURL != nil {
+            showImage()
+        }
     }
     
-    func showImage() {
-        // Reset any other request
-        request?.cancel()
-        
-        // GUARD: Does song have an image?
-        guard let imageURL = song?.imageURL else {
-            return
-        }
-        
-        // Is that image cached?
-        if let image = PhotosDataManager.sharedManager.cachedImage(imageURL) {
-            // Then show it
-            self.songImage.image = image
-            self.song?.image = image                //update song image??
+    @IBAction func share(sender: AnyObject) {
+        // Share song URL
+        if let url = song.url {
+            let shareVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+            self.presentViewController(shareVC, animated: true, completion: nil)
         } else {
-            // Else download image if not cached
-            request = PhotosDataManager.sharedManager.getNetworkImage(imageURL) { image in
-                // Show new downloaded image
-                self.songImage.image = image
-                self.song?.image = image
-            }
+            print("how come song \(song.id) doesn't have a url")
         }
+        
     }
-    
+
     @IBAction func showPlayer(sender: AnyObject) {
+        // Show popup player VC
         let popupContentVC = storyboard?.instantiateViewControllerWithIdentifier("PlayerViewController") as! PlayerViewController
         popupContentVC.song = song
         navigationController?.presentPopupBarWithContentViewController(popupContentVC, animated: true, completion: nil)
+    }
+    
+    private func showImage() {
+        // GUARD: Does song have an image?
+        guard let imageURL = song.imageURL else {
+            return
+        }
+        
+        // Reset any other request
+        request?.cancel()
+        
+        // Is that image cached?
+        if let image = PhotosDataManager.sharedManager.cachedImage(imageURL) {
+            // Then show it (and update song image. not sure if this step is needed)
+            songImage.image = image
+            song.image = image
+        } else {
+            // Else download image if not cached
+            request = PhotosDataManager.sharedManager.getNetworkImage(imageURL) { image in
+                // Show new downloaded image and set song image
+                self.songImage.image = image
+                self.song.image = image
+            }
+        }
     }
     
 }

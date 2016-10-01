@@ -18,15 +18,63 @@ class ArtistsListViewController: UICollectionViewController {
     var lastFetchedPage = 0
     var fetching = false
     let defaultSort = "-songsCount"
-    
-    private func configureUI(busy: Bool) {
-        // Set UI and fetching to busy or not
-        self.fetching = busy
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = busy
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Get first page of artists
+        if !fetching {
+            getArtistsList(1, sort: defaultSort)
+        }
     }
     
-    private func getArtistsList(page: Int, sort: String) {
+    override func viewDidLayoutSubviews() {
+        // Based on the equation: width = cols * item + ((cols - 1) * spacing)
+        // Aspect ratio for cell is 5:6 (150:180)
+        // Always set storyboardWidth = cell width at storyboard
+        let storyboardWidth: CGFloat = 100
+        let cols = floor((view.frame.size.width + flowLayout.minimumInteritemSpacing)/(storyboardWidth + flowLayout.minimumInteritemSpacing))
+        let itemWidth = (view.frame.size.width - (cols - 1) * flowLayout.minimumInteritemSpacing)/cols
+        let itemHeight = itemWidth * (6.0/5.0)
+
+        flowLayout.itemSize = CGSizeMake(itemWidth, itemHeight)
+    }
+    
+    // ** Do I really need it?
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        // Layout update if size changed
+        collectionView?.collectionViewLayout.invalidateLayout()
+    }
+    
+    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return artistsList.count
+    }
+    
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        // For scrolling purposes, fetch more artists if:
+        //   Not busy fetching
+        //   Still more pages to fetch
+        //   Close to the bottom by 4 artists
+        if !fetching && lastFetchedPage < totalPages && indexPath.row >= artistsList.count - 4 {
+            getArtistsList(lastFetchedPage + 1, sort: defaultSort)
+        }
         
+        // Build the cell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ArtistsCell", forIndexPath: indexPath) as! ArtistsCollectionViewCell
+        cell.configure(artistsList[indexPath.row])
+        return cell
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Assign the artist of the destination VC
+        if segue.identifier == "Artist", let artistCell = sender as! ArtistsCollectionViewCell? {
+            let artistVC = segue.destinationViewController as! ArtistViewController
+            artistVC.artist = artistCell.artist
+        }
+    }
+
+    private func getArtistsList(page: Int, sort: String) {
         // Set busy fetching
         configureUI(true)
         
@@ -89,71 +137,12 @@ class ArtistsListViewController: UICollectionViewController {
                 // Reload data and finish
                 self.collectionView?.reloadData()
                 self.configureUI(false)
-            }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Get first page of artists
-        if !self.fetching {
-            getArtistsList(1, sort: defaultSort)
         }
     }
     
-    override func viewDidLayoutSubviews() {
-        // Based on the equation: width = cols * item + ((cols - 1) * spacing)
-        // Aspect ratio for cell is 5:6 (150:180)
-        // Always set storyboardWidth = cell width at storyboard
-        let storyboardWidth: CGFloat = 100
-        let cols = floor((self.view.frame.size.width + flowLayout.minimumInteritemSpacing)/(storyboardWidth + flowLayout.minimumInteritemSpacing))
-        let itemWidth = (self.view.frame.size.width - (cols - 1) * flowLayout.minimumInteritemSpacing)/cols
-        let itemHeight = itemWidth * (6.0/5.0)
-
-        flowLayout.itemSize = CGSizeMake(itemWidth, itemHeight)
-    }
-    
-    // ** Do I need it?
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    // ** Do I really need it?
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
-        // Layout update if size changed
-        collectionView?.collectionViewLayout.invalidateLayout()
-    }
-    
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.artistsList.count
-    }
-    
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        // Fetch more artists if:
-        //   Not busy fetching
-        //   Still more pages to fetch
-        //   Close to the bottom by 4 artists
-        if !self.fetching && self.lastFetchedPage < self.totalPages && indexPath.row >= self.artistsList.count - 4 {
-            getArtistsList(self.lastFetchedPage + 1, sort: defaultSort)
-        }
-        
-        // Get the cell
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ArtistsCell", forIndexPath: indexPath) as! ArtistsCollectionViewCell
-
-        // Configure the cell
-        cell.configure(self.artistsList[indexPath.row])
-
-        // Return
-        return cell
-    }
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Assign the artist of the destination VC
-        if segue.identifier == "Artist", let artistCell = sender as! ArtistsCollectionViewCell? {
-            let artistVC = segue.destinationViewController as! ArtistViewController
-            artistVC.artist = artistCell.artist
-        }
+    private func configureUI(busy: Bool) {
+        // Set UI and fetching to busy or not
+        fetching = busy
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = busy
     }
 }

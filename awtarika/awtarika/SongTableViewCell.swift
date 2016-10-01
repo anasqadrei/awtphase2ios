@@ -17,15 +17,15 @@ class SongTableViewCell: UITableViewCell {
     var song: Song!
 
     func configure(song: Song) {
+        // Save the song in the cell to be passed later on to song VC
         self.song = song
         
         // Fill data
-        title.text = self.song.title!
-        duration.text = "🕓 \(self.song.durationDesc!)"
-        plays.text = "▶️ \(self.song.playsCount!)"
+        title.text = song.title
+        plays.text = "▶️ \(song.playsCount)"
+        if let durationStr = song.durationDesc {
+            duration.text = "🕓 \(durationStr)"
+        }
     }
     
-    @IBAction func play(sender: UIButton) {
-        print("\(self.song.title)")
-    }
 }

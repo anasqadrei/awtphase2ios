@@ -10,13 +10,23 @@ import UIKit
 import Alamofire
 
 class ArtistsCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var name: UILabel!
-    @IBOutlet weak var image: UIImageView!
     
-    var request: Request?
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
+    
     var artist: Artist!
-  
+    var request: Request?
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        // Circular image at layout updates
+        imageView.layer.cornerRadius = imageView.frame.size.width/2
+        imageView.clipsToBounds = true
+    }
+
     func configure(artist: Artist) {
+        // Save the artist in the cell to be passed later on to artist VC
         self.artist = artist
         
         // Fill data
@@ -24,40 +34,33 @@ class ArtistsCollectionViewCell: UICollectionViewCell {
         populate()
     }
     
-    func reset() {
+    private func reset() {
         // Clear visuals and cancel request if there are anything pending by cell reusability
         name.text = nil
-        image.image = nil
+        imageView.image = nil
         request?.cancel()
     }
     
-    func populate() {
+    private func populate() {
         // First set the artist name
-        self.name.text = self.artist.name!
+        name.text = artist.name
 
         // GUARD: Does artist have an image?
-        guard let imageURL = self.artist.imageURL else {
+        guard let imageURL = artist.imageURL else {
             return
         }
 
         // Is that image cached?
         if let image = PhotosDataManager.sharedManager.cachedImage(imageURL) {
             // Then show it
-            self.image.image = image
+            imageView.image = image
         } else {
             // Else download image if not cached
             request = PhotosDataManager.sharedManager.getNetworkImage(imageURL) { image in
                 // Show new downloaded image
-                self.image.image = image
+                self.imageView.image = image
             }
         }
     }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        // Circular image at layout updates
-        self.image.layer.cornerRadius = self.image.frame.size.width/2
-        self.image.clipsToBounds = true
-    }
+
 }

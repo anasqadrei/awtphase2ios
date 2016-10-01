@@ -10,15 +10,16 @@ import Foundation
 import UIKit
 
 class Song {
-    var id: Int?
-    var title: String?
+    var id: Int
+    var title: String
     var artistName: String?
+    var url: String?
     var description: String?
     var imageURL: String?
     var image: UIImage?
     var durationDesc: String?
-    var playsCount: Int?
-    var likesCount: Int?
+    var playsCount: Int
+    var likesCount: Int
 
     init(id: Int, title: String){
         self.id = id

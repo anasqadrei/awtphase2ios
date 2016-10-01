@@ -20,16 +20,14 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
     @IBOutlet weak var togglePlayPauseButton: UIButton!
     @IBOutlet weak var volumeSlider: UISlider!
     
+    let audioPlayer = (UIApplication.sharedApplication().delegate as! AppDelegate).audioPlayer
+    
     var play: UIBarButtonItem!
     var pause: UIBarButtonItem!
     var stop: UIBarButtonItem!
     var spinner: UIBarButtonItem!
 
-//    let audioPlayer = AudioPlayer()
-    let audioPlayer = (UIApplication.sharedApplication().delegate as! AppDelegate).audioPlayer
-    
-
-    var song: Song? {
+    var song: Song! {
         didSet {
             popupItem.title = song!.title
             popupItem.subtitle = song!.artistName
@@ -38,24 +36,9 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
         }
     }
     
-    @IBAction func togglePlayPause(sender: AnyObject) {
-
-        //
-        switch audioPlayer.state {
-        case .Stopped, .Paused:
-            playSong()
-        case .Playing:
-            audioPlayer.pause()
-        case .Failed(AudioPlayerError.FoundationError(nil)):
-            dismissVC()
-        default:
-            return
-        }
-    }
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-
+        
         audioPlayer.delegate = self
         
         LNPopupBar.appearanceWhenContainedInInstancesOfClasses([UINavigationController.self]).barStyle = .Black
@@ -71,11 +54,85 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
         pause.accessibilityLabel = NSLocalizedString("Pause", comment: "")
         
         stop = UIBarButtonItem(barButtonSystemItem: .Stop, target: self, action: #selector(dismissVC))
-        stop.accessibilityLabel = NSLocalizedString("Error", comment: "")
+        stop.accessibilityLabel = NSLocalizedString("Close", comment: "")
+        popupItem.rightBarButtonItems = [ stop ]
     }
     
-    func dismissVC() {
-        popupPresentationContainerViewController?.dismissPopupBarAnimated(true, completion: nil)
+    override func viewWillAppear(animated: Bool) {
+        songTitleLabel.text = song.title
+        artistNameLabel.text = song.artistName
+        if song.image != nil {
+            songImage.image = song.image
+        }
+    }
+    
+    func audioPlayer(audioPlayer: AudioPlayer, didChangeStateFrom from: AudioPlayerState, toState to: AudioPlayerState) {
+        
+        // now buffering
+        if to == .Buffering || to == .WaitingForConnection {
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+            popupItem.leftBarButtonItems = [ spinner ]
+        }
+        
+        // end buffering
+        if from == .Buffering || from == .WaitingForConnection {
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        }
+        
+        // show play
+        if to == .Stopped || to == .Paused {
+            popupItem.leftBarButtonItems = [ play ]
+            if isViewLoaded() {
+                togglePlayPauseButton.setImage(UIImage(named: "playerPlay"), forState: .Normal)
+            }
+        }
+        
+        // show pause
+        if to == .Playing {
+            popupItem.leftBarButtonItems = [ pause ]
+            if isViewLoaded() {
+                togglePlayPauseButton.setImage(UIImage(named: "playerPause"), forState: .Normal)
+            }
+        }
+        
+        // show stop/error
+        if to == .Failed(AudioPlayerError.FoundationError(nil)) {
+            popupItem.rightBarButtonItems = [  ]
+            popupItem.leftBarButtonItems = [ stop ]
+            if isViewLoaded() {
+                togglePlayPauseButton.setImage(UIImage(named: "playerClose"), forState: .Normal)
+            }
+        }
+        
+        // dismiss at end
+        if from == .Playing && to == .Stopped {
+            dismissVC()
+        }
+    }
+    
+    func audioPlayer(audioPlayer: AudioPlayer, didUpdateProgressionToTime time: NSTimeInterval, percentageRead: Float) {
+        popupItem.progress = percentageRead/100.0
+        if isViewLoaded() {
+            progressView.progress = percentageRead/100.0
+        }
+    }
+    
+    @IBAction func togglePlayPause(sender: AnyObject) {
+        //
+        switch audioPlayer.state {
+        case .Stopped, .Paused:
+            playSong()
+        case .Playing:
+            audioPlayer.pause()
+        case .Failed(AudioPlayerError.FoundationError(_)):
+            dismissVC()
+        default:
+            return
+        }
+    }
+    
+    @IBAction func volumeChange(sender: AnyObject) {
+        audioPlayer.volume = volumeSlider.value
     }
     
     func playSong() {
@@ -93,7 +150,7 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
             // Create request
             let url = "\(Constants.URLs.Host)/song/play"
             let parameters = [
-                "songId": "\(song!.id!)"
+                "songId": "\(song.id)"
             ]
             let headers = ["Accept": "application/json"]
             Alamofire.request(.GET, url, parameters: parameters, headers: headers)
@@ -121,92 +178,32 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
                     let NSSongURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Havana Express - Gangstas Paradise (Salsa Version).mp3", ofType:nil)!)
                     
                     let item = AudioItem(mediumQualitySoundURL: NSSongURL)
-                    item?.title = self.song!.title
-                    item?.artist = self.song!.artistName
+                    item?.title = self.song.title
+                    if let artistName = self.song.artistName {
+                        item?.artist = artistName
+                    }
+                    if let image = self.song.image {
+                        item?.artworkImage = image
+                    }
+                    //play
                     self.audioPlayer.playItem(item!)
                     
+                    
                     //??
-                    self.volumeSlider.value = self.audioPlayer.volume
+                    if self.isViewLoaded() {
+                        self.volumeSlider.value = self.audioPlayer.volume
+                    }
+                    
                 }
         }
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-
-        songTitleLabel.text = song!.title
-        artistNameLabel.text = song!.artistName
-        if let image = song?.image {
-            songImage.image = image
-        }
-        
-   
-    }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func dismissVC() {
+        audioPlayer.stop()
+        if (audioPlayer.items != nil) {
+            audioPlayer.removeItemAtIndex(0)    //remove the only item to save bandwidth?
+        }
+        popupPresentationContainerViewController?.dismissPopupBarAnimated(true, completion: nil)
     }
-    
-    func audioPlayer(audioPlayer: AudioPlayer, didChangeStateFrom from: AudioPlayerState, toState to: AudioPlayerState) {
-//        print("from \(from) to \(to)")
-        
-        // now buffering
-        if to == .Buffering || to == .WaitingForConnection {
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-            popupItem.leftBarButtonItems = [ spinner ]
-        }
-        
-        // end buffering
-        if from == .Buffering || from == .WaitingForConnection {
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-        }
-        
-        // show play
-        if to == .Stopped || to == .Paused {
-            popupItem.leftBarButtonItems = [ play ]
-            togglePlayPauseButton.setImage(UIImage(named: "playerPlay"), forState: .Normal)
-        }
-        
-        // show pause
-        if to == .Playing {
-            popupItem.leftBarButtonItems = [ pause ]
-            togglePlayPauseButton.setImage(UIImage(named: "playerPause"), forState: .Normal)
-        }
-        
-        // show stop/error
-        if to == .Failed(AudioPlayerError.FoundationError(nil)) {
-            popupItem.leftBarButtonItems = [ stop ]
-            togglePlayPauseButton.setImage(UIImage(named: "playerClose"), forState: .Normal)
-        }
-        
-        // dismiss at end
-        if from == .Playing && to == .Stopped {
-            dismissVC()
-        }
-    }
-    
-    func audioPlayer(audioPlayer: AudioPlayer, didUpdateProgressionToTime time: NSTimeInterval, percentageRead: Float) {
-        popupItem.progress = percentageRead/100.0
-        if isViewLoaded() {
-            progressView.progress = percentageRead/100.0
-        }
-    }
-
-    @IBAction func volumeChange(sender: AnyObject) {
-        audioPlayer.volume = volumeSlider.value
-    }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

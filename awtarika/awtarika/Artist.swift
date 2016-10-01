@@ -9,11 +9,11 @@
 import Foundation
 
 class Artist {
-    var id: Int?
-    var name: String?
+    var id: Int
+    var name: String
     var imageURL: String?
-    var totalSongsPages: Int?
-    var songsPageSize: Int?
+    var totalSongsPages: Int
+    var songsPageSize: Int
     
     init(id: Int, name: String){
         self.id = id

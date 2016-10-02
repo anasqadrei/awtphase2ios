@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import GoogleMobileAds
 
 class SongViewController: UIViewController {
 
@@ -18,6 +19,7 @@ class SongViewController: UIViewController {
     @IBOutlet weak var songImage: UIImageView!
     @IBOutlet weak var playsCount: UILabel!
     @IBOutlet weak var likesCount: UILabel!
+    @IBOutlet weak var adBannerView: GADBannerView!
 
     var request: Request?
     var song: Song!
@@ -38,6 +40,13 @@ class SongViewController: UIViewController {
         if song.imageURL != nil {
             showImage()
         }
+        
+        // Ad
+        adBannerView.adUnitID = Constants.AdMob.AdMobSongScreenAdUnitID
+        adBannerView.rootViewController = self
+        let request = GADRequest()
+        request.testDevices = [kDFPSimulatorID]
+        adBannerView.loadRequest(request)
     }
     
     @IBAction func share(sender: AnyObject) {

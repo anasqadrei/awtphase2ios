@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import GoogleMobileAds
 import LNPopupController
 import KDEAudioPlayer
 
@@ -19,6 +20,7 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var togglePlayPauseButton: UIButton!
     @IBOutlet weak var volumeSlider: UISlider!
+    @IBOutlet weak var adBannerView: GADBannerView!
     
     let audioPlayer = (UIApplication.sharedApplication().delegate as! AppDelegate).audioPlayer
     
@@ -38,7 +40,7 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
+
         audioPlayer.delegate = self
 
         LNPopupBar.appearanceWhenContainedInInstancesOfClasses([UINavigationController.self]).barStyle = .Black
@@ -60,13 +62,23 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
     }
     
     override func viewWillAppear(animated: Bool) {
+        //
         songTitleLabel.text = song.title
         artistNameLabel.text = song.artistName
         if song.image != nil {
             songImage.image = song.image
         }
+        // Mainly to init the progress in case of loading error
+        progressView.progress = popupItem.progress
+        
+        // Ad
+        adBannerView.adUnitID = Constants.AdMob.AdMobPlayerScreenAdUnitID
+        adBannerView.rootViewController = self
+        let adRequest = GADRequest()
+        adRequest.testDevices = [kDFPSimulatorID]
+        adBannerView.loadRequest(adRequest)
     }
-    
+
     func audioPlayer(audioPlayer: AudioPlayer, didChangeStateFrom from: AudioPlayerState, toState to: AudioPlayerState) {
         
         // now buffering
@@ -114,7 +126,7 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
     func audioPlayer(audioPlayer: AudioPlayer, didUpdateProgressionToTime time: NSTimeInterval, percentageRead: Float) {
         popupItem.progress = percentageRead/100.0
         if isViewLoaded() {
-            progressView.progress = percentageRead/100.0
+            progressView.progress = popupItem.progress
         }
     }
     
@@ -173,10 +185,10 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
                     }
                     
                     //
-//                    let NSSongURL = NSURL(string: songURL)!
+                    let NSSongURL = NSURL(string: songURL)!
                     
                     //local
-                    let NSSongURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Havana Express - Gangstas Paradise (Salsa Version).mp3", ofType:nil)!)
+//                    let NSSongURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Havana Express - Gangstas Paradise (Salsa Version).mp3", ofType:nil)!)
                     
                     let item = AudioItem(mediumQualitySoundURL: NSSongURL)
                     item?.title = self.song.title

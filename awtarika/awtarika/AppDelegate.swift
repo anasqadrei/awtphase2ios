@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 import KDEAudioPlayer
 
 @UIApplicationMain
@@ -17,6 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        // Use Firebase library to configure APIs
+        FIRApp.configure()
+        // Initialize Google Mobile Ads SDK
+        GADMobileAds.configureWithApplicationID(Constants.AdMob.AdMobApplicationID)
+        // To handle player events
         application.beginReceivingRemoteControlEvents()
         return true
     }

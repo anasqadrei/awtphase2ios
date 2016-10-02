@@ -17,6 +17,7 @@
 		E40B55131CBF264300A2F414 /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40B55121CBF264300A2F414 /* Artist.swift */; };
 		E40B55191CBF94DD00A2F414 /* ArtistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40B55181CBF94DD00A2F414 /* ArtistViewController.swift */; };
 		E41A4F5D1D921ED1002BE9CD /* Havana Express - Gangstas Paradise (Salsa Version).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E41A4F5C1D921ED1002BE9CD /* Havana Express - Gangstas Paradise (Salsa Version).mp3 */; };
+		E45D304A1DA0664400B46957 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E45D30491DA0664400B46957 /* GoogleService-Info.plist */; };
 		E4608B0C1D7CF4E900AA65A9 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = E4608B0B1D7CF4E900AA65A9 /* Podfile */; };
 		E4608B0E1D7CFF6800AA65A9 /* PhotosDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4608B0D1D7CFF6800AA65A9 /* PhotosDataManager.swift */; };
 		E4608B111D87FBA900AA65A9 /* SongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4608B101D87FBA800AA65A9 /* SongViewController.swift */; };
@@ -66,6 +67,7 @@
 		E40B55121CBF264300A2F414 /* Artist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
 		E40B55181CBF94DD00A2F414 /* ArtistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistViewController.swift; sourceTree = "<group>"; };
 		E41A4F5C1D921ED1002BE9CD /* Havana Express - Gangstas Paradise (Salsa Version).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Havana Express - Gangstas Paradise (Salsa Version).mp3"; sourceTree = "<group>"; };
+		E45D30491DA0664400B46957 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E4608B0B1D7CF4E900AA65A9 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E4608B0D1D7CFF6800AA65A9 /* PhotosDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosDataManager.swift; sourceTree = "<group>"; };
 		E4608B101D87FBA800AA65A9 /* SongViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongViewController.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 				E4608B191D88E34500AA65A9 /* PlayerViewController.swift */,
 				E40B54E71CBC709800A2F414 /* Assets.xcassets */,
 				E40B54EC1CBC709800A2F414 /* Info.plist */,
+				E45D30491DA0664400B46957 /* GoogleService-Info.plist */,
 				E4608B0D1D7CFF6800AA65A9 /* PhotosDataManager.swift */,
 				E49E53611D6FBCFB000472F8 /* Constants.swift */,
 				E41A4F5C1D921ED1002BE9CD /* Havana Express - Gangstas Paradise (Salsa Version).mp3 */,
@@ -309,6 +312,7 @@
 				E4608B181D88E00D00AA65A9 /* Cartfile.resolved in Resources */,
 				E41A4F5D1D921ED1002BE9CD /* Havana Express - Gangstas Paradise (Salsa Version).mp3 in Resources */,
 				E40B54E61CBC709800A2F414 /* Main.storyboard in Resources */,
+				E45D304A1DA0664400B46957 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -551,7 +555,7 @@
 				INFOPLIST_FILE = awtarika/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.anasqadrei.awtarika;
+				PRODUCT_BUNDLE_IDENTIFIER = com.awtarika.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -571,7 +575,7 @@
 				INFOPLIST_FILE = awtarika/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.anasqadrei.awtarika;
+				PRODUCT_BUNDLE_IDENTIFIER = com.awtarika.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

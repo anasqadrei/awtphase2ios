@@ -18,6 +18,8 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
     @IBOutlet weak var artistNameLabel: UILabel!
     @IBOutlet weak var songImage: UIImageView!
     @IBOutlet weak var progressView: UIProgressView!
+    @IBOutlet weak var progressTime: UILabel!
+    @IBOutlet weak var remainingTime: UILabel!
     @IBOutlet weak var togglePlayPauseButton: UIButton!
     @IBOutlet weak var adBannerView: GADBannerView!
     
@@ -63,7 +65,16 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
     override func viewWillAppear(animated: Bool) {
         //
         songTitleLabel.text = song.title
-        artistNameLabel.text = song.artistName
+        if song.artistName != nil {
+            artistNameLabel.text = song.artistName!
+        } else {
+            artistNameLabel.text = ""
+        }
+        if song.durationDesc != nil {
+            remainingTime.text = song.durationDesc!
+        } else {
+            remainingTime.text = ""
+        }
         if song.image != nil {
             songImage.image = song.image
         }
@@ -126,9 +137,15 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
         popupItem.progress = percentageRead/100.0
         if isViewLoaded() {
             progressView.progress = popupItem.progress
+            progressTime.text = stringFromTimeInterval(round(time))
+            if audioPlayer.currentItemDuration != nil {
+                remainingTime.text = "-" + stringFromTimeInterval(round(audioPlayer.currentItemDuration!) - round(time))
+            } else {
+                remainingTime.text = ""
+            }
         }
     }
-    
+
     @IBAction func togglePlayPause(sender: AnyObject) {
         //
         switch audioPlayer.state {
@@ -207,4 +224,18 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
         popupPresentationContainerViewController?.dismissPopupBarAnimated(true, completion: nil)
     }
 
+    func stringFromTimeInterval(interval:NSTimeInterval) -> String {
+        //
+        let ti = Int(interval)
+        
+        let seconds = ti % 60
+        let minutes = (ti / 60) % 60
+        let hours = (ti / 3600)
+        
+        if hours == 0 {
+            return String(format: "%d:%0.2d",minutes,seconds)
+        } else {
+            return String(format: "%d:%0.2d:%0.2d",hours,minutes,seconds)
+        }
+    }
 }

@@ -19,6 +19,7 @@ class SongViewController: UIViewController {
     @IBOutlet weak var songImage: UIImageView!
     @IBOutlet weak var playsCount: UILabel!
     @IBOutlet weak var likesCount: UILabel!
+    @IBOutlet weak var duration: UILabel!
     @IBOutlet weak var adBannerView: GADBannerView!
 
     var request: Request?
@@ -30,13 +31,22 @@ class SongViewController: UIViewController {
         // Set VC data
         songTitle.text = song.title
         if song.artistName != nil {
-            artistName.text = song.artistName
+            artistName.text = song.artistName!
+        } else {
+            artistName.text = ""
         }
         if song.description != nil {
-            songDescription.text = song.description
+            songDescription.text = song.description!
+        } else {
+            songDescription.text = ""
         }
         playsCount.text = "▶️ \(song.playsCount)"
         likesCount.text = "👍 \(song.likesCount)"
+        if song.durationDesc != nil {
+            duration.text = "🕓 \(song.durationDesc!)"
+        } else {
+            duration.text = ""
+        }
         if song.imageURL != nil {
             showImage()
         }

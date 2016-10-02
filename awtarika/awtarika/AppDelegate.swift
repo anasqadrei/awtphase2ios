@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use Firebase library to configure APIs
         FIRApp.configure()
         // Initialize Google Mobile Ads SDK
-        GADMobileAds.configureWithApplicationID(Constants.AdMob.AdMobApplicationID)
+        GADMobileAds.configureWithApplicationID(Constants.AdMob.ApplicationID)
         // To handle player events
         application.beginReceivingRemoteControlEvents()
         return true

@@ -42,10 +42,10 @@ class SongViewController: UIViewController {
         }
         
         // Ad
-        adBannerView.adUnitID = Constants.AdMob.AdMobSongScreenAdUnitID
+        adBannerView.adUnitID = Constants.AdMob.SongScreenAdUnitID
         adBannerView.rootViewController = self
         let request = GADRequest()
-        request.testDevices = [kDFPSimulatorID]
+        request.testDevices = [kDFPSimulatorID, Constants.AdMob.TestDeviceAnasIPhone4S]
         adBannerView.loadRequest(request)
     }
     

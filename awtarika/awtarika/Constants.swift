@@ -16,8 +16,9 @@ struct Constants {
     }
     
     struct AdMob {
-        static let AdMobApplicationID = "ca-app-pub-8300933998503689~9095334088"
-        static let AdMobSongScreenAdUnitID = "ca-app-pub-8300933998503689/3048800489"
-        static let AdMobPlayerScreenAdUnitID = "ca-app-pub-8300933998503689/5943391284"
+        static let ApplicationID = "ca-app-pub-8300933998503689~9095334088"
+        static let SongScreenAdUnitID = "ca-app-pub-8300933998503689/3048800489"
+        static let PlayerScreenAdUnitID = "ca-app-pub-8300933998503689/5943391284"
+        static let TestDeviceAnasIPhone4S = "df54a0ff1ed59ea08ba3984e50f7825e"
     }
 }

@@ -187,19 +187,12 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v1r-Zl-Cx9">
-                                        <rect key="frame" x="0.0" y="51" width="560" height="113"/>
+                                        <rect key="frame" x="0.0" y="51" width="560" height="147"/>
                                         <state key="normal" image="playerPlay"/>
                                         <connections>
                                             <action selector="togglePlayPause:" destination="xSM-K2-AHZ" eventType="touchUpInside" id="6uR-nU-3Va"/>
                                         </connections>
                                     </button>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" minimumValueImage="playerVolumeLow" maximumValueImage="playerVolumeHigh" translatesAutoresizingMaskIntoConstraints="NO" id="yMh-Zc-WZl">
-                                        <rect key="frame" x="-2" y="168" width="564" height="31"/>
-                                        <color key="minimumTrackTintColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <action selector="volumeChange:" destination="xSM-K2-AHZ" eventType="valueChanged" id="MLn-3O-a6q"/>
-                                        </connections>
-                                    </slider>
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kts-YR-9L7" customClass="GADBannerView">
@@ -288,7 +281,6 @@
                         <outlet property="songImage" destination="ghl-bU-2NT" id="nij-R3-5z8"/>
                         <outlet property="songTitleLabel" destination="uge-Wb-VuE" id="bLQ-yC-w7j"/>
                         <outlet property="togglePlayPauseButton" destination="v1r-Zl-Cx9" id="w4f-AH-ivR"/>
-                        <outlet property="volumeSlider" destination="yMh-Zc-WZl" id="7PF-bQ-mYz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="esc-OG-uYQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -421,8 +413,6 @@
     </scenes>
     <resources>
         <image name="playerPlay" width="24" height="24"/>
-        <image name="playerVolumeHigh" width="24" height="24"/>
-        <image name="playerVolumeLow" width="24" height="24"/>
         <image name="songPlay" width="48" height="48"/>
     </resources>
 </document>

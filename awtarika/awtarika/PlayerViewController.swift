@@ -19,7 +19,6 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
     @IBOutlet weak var songImage: UIImageView!
     @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var togglePlayPauseButton: UIButton!
-    @IBOutlet weak var volumeSlider: UISlider!
     @IBOutlet weak var adBannerView: GADBannerView!
     
     let audioPlayer = (UIApplication.sharedApplication().delegate as! AppDelegate).audioPlayer
@@ -72,10 +71,10 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
         progressView.progress = popupItem.progress
         
         // Ad
-        adBannerView.adUnitID = Constants.AdMob.AdMobPlayerScreenAdUnitID
+        adBannerView.adUnitID = Constants.AdMob.PlayerScreenAdUnitID
         adBannerView.rootViewController = self
         let adRequest = GADRequest()
-        adRequest.testDevices = [kDFPSimulatorID]
+        adRequest.testDevices = [kDFPSimulatorID, Constants.AdMob.TestDeviceAnasIPhone4S]
         adBannerView.loadRequest(adRequest)
     }
 
@@ -144,10 +143,6 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
         }
     }
     
-    @IBAction func volumeChange(sender: AnyObject) {
-        audioPlayer.volume = volumeSlider.value
-    }
-    
     func playSong() {
         
         if audioPlayer.state == .Paused {
@@ -185,10 +180,10 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
                     }
                     
                     //
-                    let NSSongURL = NSURL(string: songURL)!
+//                    let NSSongURL = NSURL(string: songURL)!
                     
                     //local
-//                    let NSSongURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Havana Express - Gangstas Paradise (Salsa Version).mp3", ofType:nil)!)
+                    let NSSongURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Havana Express - Gangstas Paradise (Salsa Version).mp3", ofType:nil)!)
                     
                     let item = AudioItem(mediumQualitySoundURL: NSSongURL)
                     item?.title = self.song.title
@@ -199,14 +194,7 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
                         item?.artworkImage = image
                     }
                     //play
-                    self.audioPlayer.playItem(item!)
-                    
-                    
-                    //??
-                    if self.isViewLoaded() {
-                        self.volumeSlider.value = self.audioPlayer.volume
-                    }
-                    
+                    self.audioPlayer.playItem(item!)     
                 }
         }
     }

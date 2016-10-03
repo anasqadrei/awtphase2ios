@@ -82,7 +82,6 @@ class SongViewController: UIViewController {
         } else {
             print("how come song \(song.id) doesn't have a url")
         }
-        
     }
 
     @IBAction func showPlayer(sender: AnyObject) {

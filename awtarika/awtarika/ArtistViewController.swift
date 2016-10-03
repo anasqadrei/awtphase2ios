@@ -59,6 +59,16 @@ class ArtistViewController: UITableViewController {
         }
     }
 
+    @IBAction func share(sender: AnyObject) {
+        // Share artist URL
+        if let url = artist.url {
+            let shareVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+            self.presentViewController(shareVC, animated: true, completion: nil)
+        } else {
+            print("how come song \(artist.id) doesn't have a url")
+        }
+    }
+    
     private func getSongsList(page: Int, sort: String) {
         // Set busy fetching
         configureUI(true)

@@ -11,6 +11,7 @@ import Foundation
 class Artist {
     var id: Int
     var name: String
+    var url: String?
     var imageURL: String?
     var totalSongsPages: Int
     var songsPageSize: Int
@@ -34,6 +35,9 @@ class Artist {
         // Fill artist data
         let artist = Artist(id: id, name: name)
         
+        if let url = parsedArtist["url"] as? String {
+            artist.url = url
+        }
         if let imageURL = parsedArtist["image"] as? String {
             artist.imageURL = imageURL
         }

@@ -9,21 +9,29 @@
 import UIKit
 import Firebase
 import KDEAudioPlayer
+import iOSLogEntries
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     let audioPlayer = AudioPlayer()
-
+ 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // LogEntries
+        LELog.sessionWithToken(Constants.LogEntries.Token)
+        
         // Use Firebase library to configure APIs
         FIRApp.configure()
+        
         // Initialize Google Mobile Ads SDK
         GADMobileAds.configureWithApplicationID(Constants.AdMob.ApplicationID)
+        
         // To handle player events
         application.beginReceivingRemoteControlEvents()
+        
         return true
     }
     

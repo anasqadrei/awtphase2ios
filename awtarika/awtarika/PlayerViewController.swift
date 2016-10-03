@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import iOSLogEntries
 import GoogleMobileAds
 import LNPopupController
 import KDEAudioPlayer
@@ -184,14 +185,14 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
                     
                     // GUARD: Data parsed to JSON?
                     guard let parsedResult = response.result.value else {
-                        print("couldn't serialize response")
+                        LELog.log("\(self) playSong(\(self.song.id)): Couldn't serialize response.")
                         UIApplication.sharedApplication().networkActivityIndicatorVisible = false
                         return
                     }
                     
                     // GUARD: Are the "photos" and "photo" keys in our result?
                     guard let songURL = parsedResult["url"] as? String else {
-                        print("Cannot find keys 'url' in \(parsedResult)")
+                        LELog.log("\(self) playSong(\(self.song.id)): Couldn't find key 'url' in \(parsedResult)")
                         UIApplication.sharedApplication().networkActivityIndicatorVisible = false
                         return
                     }

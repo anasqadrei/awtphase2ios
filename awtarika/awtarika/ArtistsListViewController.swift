@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import iOSLogEntries
 
 class ArtistsListViewController: UICollectionViewController {
 
@@ -21,7 +22,7 @@ class ArtistsListViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Get first page of artists
         if !fetching {
             getArtistsList(1, sort: defaultSort)
@@ -91,7 +92,7 @@ class ArtistsListViewController: UICollectionViewController {
                 
                 // GUARD: Data parsed to JSON?
                 guard let parsedResult = response.result.value else {
-                    print("couldn't serialize response")
+                    LELog.log("\(self) getArtistsList(\(page),\(sort)): Couldn't serialize response.")
                     self.configureUI(false)
                     return
                 }
@@ -99,7 +100,7 @@ class ArtistsListViewController: UICollectionViewController {
                 // GUARD: Are the "photos" and "photo" keys in our result?
                 guard let parsedArtistsList = parsedResult["artistsList"] as? [[String:AnyObject]],
                     totalPages = parsedResult["totalPages"] as? Int else {
-                        print("Cannot find keys 'artistsList' and 'totalPages' in \(parsedResult)")
+                        LELog.log("\(self) getArtistsList(\(page),\(sort)): Couldn't find keys 'artistsList' and 'totalPages' in \(parsedResult)")
                         self.configureUI(false)
                         return
                 }

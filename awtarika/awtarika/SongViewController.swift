@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import iOSLogEntries
 import GoogleMobileAds
 import ActiveLabel
 
@@ -28,7 +29,7 @@ class SongViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Set VC data
         navigationItem.title = song.title
         songTitle.text = song.title
@@ -80,7 +81,7 @@ class SongViewController: UIViewController {
             let shareVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
             self.presentViewController(shareVC, animated: true, completion: nil)
         } else {
-            print("how come song \(song.id) doesn't have a url")
+            LELog.log("\(self) share(): Song \(song.id) doesn't have a url.")
         }
     }
 

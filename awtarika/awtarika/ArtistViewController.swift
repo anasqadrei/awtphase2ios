@@ -9,6 +9,7 @@
 
 import UIKit
 import Alamofire
+import iOSLogEntries
 
 class ArtistViewController: UITableViewController {
     
@@ -21,7 +22,7 @@ class ArtistViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Set VC data
         navigationItem.title = artist.name
         totalPages = artist.totalSongsPages
@@ -65,7 +66,7 @@ class ArtistViewController: UITableViewController {
             let shareVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
             self.presentViewController(shareVC, animated: true, completion: nil)
         } else {
-            print("how come song \(artist.id) doesn't have a url")
+            LELog.log("\(self) share(): Artist \(artist.id) doesn't have a url.")
         }
     }
     
@@ -88,7 +89,7 @@ class ArtistViewController: UITableViewController {
                 
                 // GUARD: Data parsed to JSON?
                 guard let parsedSongsList = response.result.value as? [[String:AnyObject]] else {
-                    print("couldn't serialize response")
+                    LELog.log("\(self) getSongsList(\(page),\(sort)): Couldn't serialize response.")
                     self.configureUI(false)
                     return
                 }

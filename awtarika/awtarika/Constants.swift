@@ -21,4 +21,9 @@ struct Constants {
         static let PlayerScreenAdUnitID = "ca-app-pub-8300933998503689/5943391284"
         static let TestDeviceAnasIPhone4S = "df54a0ff1ed59ea08ba3984e50f7825e"
     }
+    
+    struct LogEntries {
+        static let Token = "e2043c8f-c402-48dc-8800-48bab57bcfa5"
+//        static let Token = "e2043c8f-c402-48dc-8800-48bab57bcfa5"// add live
+    }
 }

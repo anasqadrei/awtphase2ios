@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import iOSLogEntries
 
 class HashtagTableViewController: UITableViewController {
 
@@ -74,7 +75,7 @@ class HashtagTableViewController: UITableViewController {
 
                 // GUARD: Data parsed to JSON?
                 guard let parsedResult = response.result.value else {
-                    print("couldn't serialize response")
+                    LELog.log("\(self) getSongsList(\(page)): Couldn't serialize response.")
                     self.configureUI(false)
                     return
                 }
@@ -82,7 +83,7 @@ class HashtagTableViewController: UITableViewController {
                 // GUARD: Are the "photos" and "photo" keys in our result?
                 guard let parsedSongsList = parsedResult["songsList"] as? [[String:AnyObject]],
                     totalPages = parsedResult["totalPages"] as? Int else {
-                        print("Cannot find keys 'songsList' and 'totalPages' in \(parsedResult)")
+                        LELog.log("\(self) getSongsList(\(page)): Couldn't find keys 'songsList' and 'totalPages' in \(parsedResult)")
                         self.configureUI(false)
                         return
                 }

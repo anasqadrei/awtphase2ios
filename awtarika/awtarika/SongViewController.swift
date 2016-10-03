@@ -9,13 +9,14 @@
 import UIKit
 import Alamofire
 import GoogleMobileAds
+import ActiveLabel
 
 class SongViewController: UIViewController {
 
     @IBOutlet weak var songTitle: UILabel!
     @IBOutlet weak var artistName: UILabel!
     @IBOutlet weak var playerButton: UIButton!
-    @IBOutlet weak var songDescription: UILabel!
+    @IBOutlet weak var songDescription: ActiveLabel!
     @IBOutlet weak var songImage: UIImageView!
     @IBOutlet weak var playsCount: UILabel!
     @IBOutlet weak var likesCount: UILabel!
@@ -29,6 +30,7 @@ class SongViewController: UIViewController {
         super.viewDidLoad()
         
         // Set VC data
+        navigationItem.title = song.title
         songTitle.text = song.title
         if song.artistName != nil {
             artistName.text = song.artistName!
@@ -36,6 +38,19 @@ class SongViewController: UIViewController {
             artistName.text = ""
         }
         if song.description != nil {
+            // Custom hashtags to allow special chars in the string. Default hashtag doesn't allow symbols.
+            let customHashtag = ActiveType.Custom(pattern: "#(\\S+)")
+            songDescription.enabledTypes = [customHashtag]
+            songDescription.customColor[customHashtag] = songDescription.hashtagColor
+            songDescription.customSelectedColor[customHashtag] = songDescription.hashtagSelectedColor
+            songDescription.handleCustomTap(for: customHashtag) { element in
+                // Segue to the hashtag VC on click
+                let hashtagVC = self.storyboard?.instantiateViewControllerWithIdentifier("HashtagView") as! HashtagTableViewController
+                hashtagVC.hashtag = element
+                self.navigationController?.pushViewController(hashtagVC, animated: true)
+            }
+            
+            // Assign text after
             songDescription.text = song.description!
         } else {
             songDescription.text = ""
@@ -72,7 +87,7 @@ class SongViewController: UIViewController {
 
     @IBAction func showPlayer(sender: AnyObject) {
         // Show popup player VC
-        let popupContentVC = storyboard?.instantiateViewControllerWithIdentifier("PlayerViewController") as! PlayerViewController
+        let popupContentVC = storyboard?.instantiateViewControllerWithIdentifier("PlayerView") as! PlayerViewController
         popupContentVC.song = song
         navigationController?.presentPopupBarWithContentViewController(popupContentVC, animated: true, completion: nil)
     }

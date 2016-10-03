@@ -23,5 +23,30 @@ class Artist {
         totalSongsPages = 1
         songsPageSize = 20
     }
+    
+    static func createArtist(parsedArtist: [String:AnyObject]) -> Artist? {
+        
+        // GUARD: Are the artist "_id" and "name" keys in our result?
+        guard let id = parsedArtist["_id"] as? Int, name = parsedArtist["name"] as? String else {
+            return nil
+        }
+        
+        // Fill artist data
+        let artist = Artist(id: id, name: name)
+        
+        if let imageURL = parsedArtist["image"] as? String {
+            artist.imageURL = imageURL
+        }
+        if let totalSongsPages = parsedArtist["totalSongsPages"] as? Int {
+            artist.totalSongsPages = totalSongsPages
+        }
+        if let songsPageSize = parsedArtist["songsPageSize"] as? Int {
+            artist.songsPageSize = songsPageSize
+        }
+        
+        //Return
+        return artist
+    }
+
 
 }

@@ -7,4 +7,5 @@ target 'awtarika' do
     pod 'Firebase/Core'
     pod 'Firebase/AdMob'
     pod 'KDEAudioPlayer'
+    pod 'ActiveLabel'
 end

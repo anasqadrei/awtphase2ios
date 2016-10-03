@@ -68,7 +68,7 @@ class ArtistsListViewController: UICollectionViewController {
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Assign the artist of the destination VC
-        if segue.identifier == "Artist", let artistCell = sender as! ArtistsCollectionViewCell? {
+        if segue.identifier == "ArtistsListToArtist", let artistCell = sender as! ArtistsCollectionViewCell? {
             let artistVC = segue.destinationViewController as! ArtistViewController
             artistVC.artist = artistCell.artist
         }
@@ -107,27 +107,10 @@ class ArtistsListViewController: UICollectionViewController {
                 // Fill the self.artistsList
                 for parsedArtist in parsedArtistsList {
                     
-                    // GUARD: Are the artist "_id" and "name" keys in our result?
-                    guard let id = parsedArtist["_id"] as? Int, name = parsedArtist["name"] as? String else {
-                        // Skip that artist
-                        continue
+                    // Append to self.songsList
+                    if let artist = Artist.createArtist(parsedArtist) {
+                        self.artistsList.append(artist)
                     }
-                    
-                    // Fill artist data
-                    let artist = Artist(id: id, name: name)
-                    
-                    if let imageURL = parsedArtist["image"] as? String {
-                        artist.imageURL = imageURL
-                    }
-                    if let totalSongsPages = parsedArtist["totalSongsPages"] as? Int {
-                        artist.totalSongsPages = totalSongsPages
-                    }
-                    if let songsPageSize = parsedArtist["songsPageSize"] as? Int {
-                        artist.songsPageSize = songsPageSize
-                    }
-                    
-                    // Append to self.artistsList
-                    self.artistsList.append(artist)
                 }
                 
                 // Set artist page related values

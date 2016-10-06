@@ -121,6 +121,8 @@ class ArtistsListViewController: UICollectionViewController {
                     // Append to self.songsList
                     if let artist = Artist.createArtist(parsedArtist) {
                         self.artistsList.append(artist)
+                    } else {
+                        LELog.log("\(self) getArtistsList(\(page),\(sort)): An artist couldn't be serialized.")
                     }
                 }
                 

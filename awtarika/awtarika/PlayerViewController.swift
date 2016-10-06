@@ -96,6 +96,20 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
         let name = "\(gaScreenCategory): \(gaScreenID)"
         GoogleAnalyticsManager.screenView(name: name)
     }
+    
+    func audioPlayer(audioPlayer: AudioPlayer, willStartPlayingItem item: AudioItem) {
+        // Increment counters when the song is to be played.
+        let url = "\(Constants.URLs.Host)/song/play"
+        let parameters = [
+            "songId": "\(song.id)",
+            "artistId": "\(song.artistID)"
+        ]
+        let headers = ["Accept": "application/json"]
+        Alamofire.request(.POST, url, parameters: parameters, headers: headers, encoding: .JSON)
+        
+        // Update local counter
+        song.playsCount += 1
+    }
 
     func audioPlayer(audioPlayer: AudioPlayer, didChangeStateFrom from: AudioPlayerState, toState to: AudioPlayerState) {
         

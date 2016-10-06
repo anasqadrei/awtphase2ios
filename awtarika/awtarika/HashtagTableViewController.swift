@@ -86,7 +86,7 @@ class HashtagTableViewController: UITableViewController {
 
                 // GUARD: Data parsed to JSON?
                 guard let parsedResult = response.result.value else {
-                    LELog.log("\(self) getSongsList(\(page)): Couldn't serialize response.")
+                    LELog.log("\(self) Hashtag \(self.hashtag) getSongsList(\(page)): Couldn't serialize response.")
                     self.configureUI(false)
                     return
                 }
@@ -94,7 +94,7 @@ class HashtagTableViewController: UITableViewController {
                 // GUARD: Are the "photos" and "photo" keys in our result?
                 guard let parsedSongsList = parsedResult["songsList"] as? [[String:AnyObject]],
                     totalPages = parsedResult["totalPages"] as? Int else {
-                        LELog.log("\(self) getSongsList(\(page)): Couldn't find keys 'songsList' and 'totalPages' in \(parsedResult)")
+                        LELog.log("\(self) Hashtag \(self.hashtag) getSongsList(\(page)): Couldn't find keys 'songsList' and 'totalPages' in \(parsedResult)")
                         self.configureUI(false)
                         return
                 }
@@ -105,6 +105,8 @@ class HashtagTableViewController: UITableViewController {
                     // Append to self.songsList
                     if let song = Song.createSong(parsedSong) {
                         self.songsList.append(song)
+                    } else {
+                        LELog.log("\(self) Hashtag \(self.hashtag) getSongsList(\(page)): A song couldn't be serialized.")
                     }
                 }
                 

@@ -13,6 +13,7 @@ class Song {
     var id: Int
     var title: String
     var artistName: String
+    var artistID: Int
     var url: String?
     var description: String?
     var imageURL: String?
@@ -21,11 +22,12 @@ class Song {
     var playsCount: Int
     var likesCount: Int
 
-    init(id: Int, title: String, artistName: String){
+    init(id: Int, title: String, artistID: Int, artistName: String){
         self.id = id
         self.title = title
+        self.artistID = artistID
         self.artistName = artistName
-        
+
         // Defaults
         playsCount = 0
         likesCount = 0
@@ -40,12 +42,15 @@ class Song {
         guard let title = parsedSong["title"] as? String else {
             return nil
         }
+        guard let artistID = (parsedSong["artist"] as? [String:AnyObject])!["_id"] as? Int else {
+            return nil
+        }
         guard let artistName = (parsedSong["artist"] as? [String:AnyObject])!["name"] as? String else {
             return nil
         }
         
         // Fill song data
-        let song = Song(id: id, title: title, artistName: artistName)
+        let song = Song(id: id, title: title, artistID: artistID, artistName: artistName)
 
         if let url = parsedSong["url"] as? String {
             song.url = url

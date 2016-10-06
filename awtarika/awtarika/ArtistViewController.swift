@@ -105,7 +105,7 @@ class ArtistViewController: UITableViewController {
                 
                 // GUARD: Data parsed to JSON?
                 guard let parsedSongsList = response.result.value as? [[String:AnyObject]] else {
-                    LELog.log("\(self) getSongsList(\(page),\(sort)): Couldn't serialize response.")
+                    LELog.log("\(self) Artist \(self.artist.id) getSongsList(\(page),\(sort)): Couldn't serialize response.")
                     self.configureUI(false)
                     return
                 }
@@ -116,6 +116,8 @@ class ArtistViewController: UITableViewController {
                     // Append to self.songsList
                     if let song = Song.createSong(parsedSong) {
                         self.songsList.append(song)
+                    } else {
+                        LELog.log("\(self) Artist \(self.artist.id) getSongsList(\(page),\(sort)): A song couldn't be serialized.")
                     }
                 }
                 

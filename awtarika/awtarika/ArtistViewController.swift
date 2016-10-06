@@ -15,15 +15,20 @@ class ArtistViewController: UITableViewController {
     
     var artist: Artist!
     var songsList = [Song]()
+    
     var totalPages = 1
     var lastFetchedPage = 0
     var fetching = false
     let defaultSort = "-playsCount"
     
+    var gaScreenCategory = "Artist"
+    var gaScreenID: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Set VC data
+        gaScreenID = "\(artist.id)/\(artist.name)"
         navigationItem.title = artist.name
         totalPages = artist.totalSongsPages
 
@@ -31,6 +36,14 @@ class ArtistViewController: UITableViewController {
         if !fetching {
             getSongsList(1, sort: defaultSort)
         }
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        
+        // Google Analytics - Screen View
+        let name = "\(gaScreenCategory): \(gaScreenID)"
+        GoogleAnalyticsManager.screenView(name: name)
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -61,6 +74,9 @@ class ArtistViewController: UITableViewController {
     }
 
     @IBAction func share(sender: AnyObject) {
+        // Google Analytics - Event
+        GoogleAnalyticsManager.event(category: gaScreenCategory, action: "Share", label: gaScreenID)
+        
         // Share artist URL
         if let url = artist.url {
             let shareVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)

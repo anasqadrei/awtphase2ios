@@ -15,10 +15,13 @@ class ArtistsListViewController: UICollectionViewController {
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
     
     var artistsList = [Artist]()
+    
     var totalPages = 1
     var lastFetchedPage = 0
     var fetching = false
     let defaultSort = "-songsCount"
+    
+    var gaScreenCategory = "Artists List"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +30,13 @@ class ArtistsListViewController: UICollectionViewController {
         if !fetching {
             getArtistsList(1, sort: defaultSort)
         }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        
+        // Google Analytics - Screen View
+        GoogleAnalyticsManager.screenView(name: gaScreenCategory)
     }
     
     override func viewDidLayoutSubviews() {

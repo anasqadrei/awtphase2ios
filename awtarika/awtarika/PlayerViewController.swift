@@ -31,8 +31,13 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
     var stop: UIBarButtonItem!
     var spinner: UIBarButtonItem!
 
+    var gaScreenCategory = "Player"
+    var gaScreenID: String!
+    
     var song: Song! {
         didSet {
+            gaScreenID = "\(song.id)/\(song.title) - \(song.artistName)"
+            
             popupItem.title = song!.title
             popupItem.subtitle = song!.artistName
             
@@ -52,25 +57,23 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
         activityIndicatorView.startAnimating()
         spinner = UIBarButtonItem(customView: activityIndicatorView)
         
-        play = UIBarButtonItem(barButtonSystemItem: .Play, target: self, action: #selector(playSong))
+        play = UIBarButtonItem(barButtonSystemItem: .Play, target: self, action: #selector(barActionPlay))
         play.accessibilityLabel = NSLocalizedString("Play", comment: "")
         
-        pause = UIBarButtonItem(barButtonSystemItem: .Pause, target: audioPlayer, action: #selector(audioPlayer.pause))
+        pause = UIBarButtonItem(barButtonSystemItem: .Pause, target: self, action: #selector(barActionPause))
         pause.accessibilityLabel = NSLocalizedString("Pause", comment: "")
         
-        stop = UIBarButtonItem(barButtonSystemItem: .Stop, target: self, action: #selector(dismissVC))
+        stop = UIBarButtonItem(barButtonSystemItem: .Stop, target: self, action: #selector(barActionClose))
         stop.accessibilityLabel = NSLocalizedString("Close", comment: "")
         popupItem.rightBarButtonItems = [ stop ]
     }
     
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        
         //
         songTitleLabel.text = song.title
-        if song.artistName != nil {
-            artistNameLabel.text = song.artistName!
-        } else {
-            artistNameLabel.text = ""
-        }
+        artistNameLabel.text = song.artistName
         if song.durationDesc != nil {
             remainingTime.text = song.durationDesc!
         } else {
@@ -88,6 +91,10 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
         let adRequest = GADRequest()
         adRequest.testDevices = [kDFPSimulatorID, Constants.AdMob.TestDeviceAnasIPhone4S]
         adBannerView.loadRequest(adRequest)
+        
+        // Google Analytics - Screen View
+        let name = "\(gaScreenCategory): \(gaScreenID)"
+        GoogleAnalyticsManager.screenView(name: name)
     }
 
     func audioPlayer(audioPlayer: AudioPlayer, didChangeStateFrom from: AudioPlayerState, toState to: AudioPlayerState) {
@@ -151,14 +158,45 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
         //
         switch audioPlayer.state {
         case .Stopped, .Paused:
+            // Google Analytics - Event
+            GoogleAnalyticsManager.event(category: gaScreenCategory, action: "Play - Popup", label: gaScreenID)
+            //
             playSong()
         case .Playing:
+            // Google Analytics - Event
+            GoogleAnalyticsManager.event(category: gaScreenCategory, action: "Pause - Popup", label: gaScreenID)
+            //
             audioPlayer.pause()
         case .Failed(AudioPlayerError.FoundationError(_)):
+            // Google Analytics - Event
+            GoogleAnalyticsManager.event(category: gaScreenCategory, action: "Close - Popup", label: gaScreenID)
+            //
             dismissVC()
         default:
             return
         }
+    }
+    
+    func barActionPlay() {
+        // Google Analytics - Event
+        GoogleAnalyticsManager.event(category: gaScreenCategory, action: "Play - Bar", label: gaScreenID)
+        
+        playSong()
+    }
+    
+    func barActionPause() {
+        // Google Analytics - Event
+        GoogleAnalyticsManager.event(category: gaScreenCategory, action: "Pause - Bar", label: gaScreenID)
+        
+        audioPlayer.pause()
+    }
+    
+    func barActionClose() {
+        // Google Analytics - Event
+        GoogleAnalyticsManager.event(category: gaScreenCategory, action: "Close - Bar", label: gaScreenID)
+        
+        //
+        dismissVC()
     }
     
     func playSong() {
@@ -205,9 +243,7 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
                     
                     let item = AudioItem(mediumQualitySoundURL: NSSongURL)
                     item?.title = self.song.title
-                    if let artistName = self.song.artistName {
-                        item?.artist = artistName
-                    }
+                    item?.artist = self.song.artistName
                     if let image = self.song.image {
                         item?.artworkImage = image
                     }
@@ -216,8 +252,9 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
                 }
         }
     }
-    
+
     func dismissVC() {
+        //
         audioPlayer.stop()
         if (audioPlayer.items != nil) {
             audioPlayer.removeItemAtIndex(0)    //remove the only item to save bandwidth?

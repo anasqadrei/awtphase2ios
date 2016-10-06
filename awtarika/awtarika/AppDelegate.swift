@@ -8,8 +8,8 @@
 
 import UIKit
 import Firebase
-import KDEAudioPlayer
 import iOSLogEntries
+import KDEAudioPlayer
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -28,6 +28,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Initialize Google Mobile Ads SDK
         GADMobileAds.configureWithApplicationID(Constants.AdMob.ApplicationID)
+        
+        // Configure Google Analytics tracker
+        var configureError:NSError?
+        GGLContext.sharedInstance().configureWithError(&configureError)
+        assert(configureError == nil, "Error configuring Google services: \(configureError)")        
+        let gai = GAI.sharedInstance()
+        gai.trackUncaughtExceptions = true
         
         // To handle player events
         application.beginReceivingRemoteControlEvents()

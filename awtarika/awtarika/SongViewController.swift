@@ -26,18 +26,18 @@ class SongViewController: UIViewController {
 
     var request: Request?
     var song: Song!
+    
+    var gaScreenCategory = "Song"
+    var gaScreenID: String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Set VC data
+        gaScreenID = "\(song.id)/\(song.title) - \(song.artistName)"
         navigationItem.title = song.title
         songTitle.text = song.title
-        if song.artistName != nil {
-            artistName.text = song.artistName!
-        } else {
-            artistName.text = ""
-        }
+        artistName.text = song.artistName
         if song.description != nil {
             // Custom hashtags to allow special chars in the string. Default hashtag doesn't allow symbols.
             let customHashtag = ActiveType.Custom(pattern: "#(\\S+)")
@@ -75,7 +75,18 @@ class SongViewController: UIViewController {
         adBannerView.loadRequest(request)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        
+        // Google Analytics - Screen View
+        let name = "\(gaScreenCategory): \(gaScreenID)"
+        GoogleAnalyticsManager.screenView(name: name)
+    }
+    
     @IBAction func share(sender: AnyObject) {
+        // Google Analytics - Event
+        GoogleAnalyticsManager.event(category: gaScreenCategory, action: "Share", label: gaScreenID)
+        
         // Share song URL
         if let url = song.url {
             let shareVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
@@ -86,6 +97,9 @@ class SongViewController: UIViewController {
     }
 
     @IBAction func showPlayer(sender: AnyObject) {
+        // Google Analytics - Event
+        GoogleAnalyticsManager.event(category: gaScreenCategory, action: "Play", label: gaScreenID)
+        
         // Show popup player VC
         let popupContentVC = storyboard?.instantiateViewControllerWithIdentifier("PlayerView") as! PlayerViewController
         popupContentVC.song = song

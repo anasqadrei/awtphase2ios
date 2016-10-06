@@ -25,7 +25,7 @@
 	<key>IS_ADS_ENABLED</key>
 	<true/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false/>
+	<true/>
 	<key>IS_APPINVITE_ENABLED</key>
 	<false/>
 	<key>IS_GCM_ENABLED</key>
@@ -36,5 +36,7 @@
 	<string>1:28762464156:ios:afc0aa924f073fd0</string>
 	<key>DATABASE_URL</key>
 	<string>https://admob-app-id-9095334088.firebaseio.com</string>
+	<key>TRACKING_ID</key>
+	<string>UA-42986486-4</string>
 </dict>
 </plist>

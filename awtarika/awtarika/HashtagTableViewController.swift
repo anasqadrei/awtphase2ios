@@ -14,9 +14,12 @@ class HashtagTableViewController: UITableViewController {
 
     var hashtag: String!
     var songsList = [Song]()
+    
     var totalPages = 1
     var lastFetchedPage = 0
     var fetching = false
+    
+    var gaScreenCategory = "Hashtag"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +31,14 @@ class HashtagTableViewController: UITableViewController {
         if !fetching {
             getSongsList(1)
         }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        
+        // Google Analytics - Screen View
+        let name = "\(gaScreenCategory): \(hashtag)"
+        GoogleAnalyticsManager.screenView(name: name)
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

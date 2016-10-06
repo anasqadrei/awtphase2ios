@@ -16,9 +16,6 @@ class DetailedSongTableViewCell: SongTableViewCell {
         super.configure(song)
         
         // Fill extra details (artist name)
-        if let artist = song.artistName {
-            artistName.text = artist
-        }
-
+        artistName.text = song.artistName
     }
 }

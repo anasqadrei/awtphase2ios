@@ -12,7 +12,7 @@ import UIKit
 class Song {
     var id: Int
     var title: String
-    var artistName: String?
+    var artistName: String
     var url: String?
     var description: String?
     var imageURL: String?
@@ -21,9 +21,10 @@ class Song {
     var playsCount: Int
     var likesCount: Int
 
-    init(id: Int, title: String){
+    init(id: Int, title: String, artistName: String){
         self.id = id
         self.title = title
+        self.artistName = artistName
         
         // Defaults
         playsCount = 0
@@ -32,17 +33,20 @@ class Song {
     
     static func createSong(parsedSong: [String:AnyObject]) -> Song? {
         
-        // GUARD: Is the song "_id" and "title" keys in our result?
-        guard let id = parsedSong["_id"] as? Int, title = parsedSong["title"] as? String else {
+        // GUARD: Are the song "_id", "title", and "artist.name" keys in our result?
+        guard let id = parsedSong["_id"] as? Int else {
+            return nil
+        }
+        guard let title = parsedSong["title"] as? String else {
+            return nil
+        }
+        guard let artistName = (parsedSong["artist"] as? [String:AnyObject])!["name"] as? String else {
             return nil
         }
         
         // Fill song data
-        let song = Song(id: id, title: title)
-        
-        if let artistName = (parsedSong["artist"] as? [String:AnyObject])!["name"] as? String {
-            song.artistName = artistName
-        }
+        let song = Song(id: id, title: title, artistName: artistName)
+
         if let url = parsedSong["url"] as? String {
             song.url = url
         }

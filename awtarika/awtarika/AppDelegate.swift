@@ -43,6 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     override func remoteControlReceivedWithEvent(event: UIEvent?) {
+        // Handles remote control events and send them to KDE audio player
         if let event = event {
             audioPlayer.remoteControlReceivedWithEvent(event)
         }

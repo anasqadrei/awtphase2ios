@@ -36,11 +36,14 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
     
     var song: Song! {
         didSet {
+            // Set google analytics song data
             gaScreenID = "\(song.id)/\(song.title) - \(song.artistName)"
             
+            // Set popup bar song data
             popupItem.title = song!.title
             popupItem.subtitle = song!.artistName
             
+            // Play the song immidiatly
             playSong()
         }
     }
@@ -48,21 +51,28 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
 
+        // Player implements audioPlayer protocol
         audioPlayer.delegate = self
 
+        // Bar custom design
         LNPopupBar.appearanceWhenContainedInInstancesOfClasses([UINavigationController.self]).barStyle = .Black
         LNPopupBar.appearanceWhenContainedInInstancesOfClasses([UINavigationController.self]).titleTextAttributes = [NSFontAttributeName: UIFont.systemFontOfSize(16)]
         
+        // Prepare bar buttons
+        // Spinner
         let activityIndicatorView = UIActivityIndicatorView()
         activityIndicatorView.startAnimating()
         spinner = UIBarButtonItem(customView: activityIndicatorView)
         
+        // Play
         play = UIBarButtonItem(barButtonSystemItem: .Play, target: self, action: #selector(barActionPlay))
         play.accessibilityLabel = NSLocalizedString("Play", comment: "")
         
+        // Pause
         pause = UIBarButtonItem(barButtonSystemItem: .Pause, target: self, action: #selector(barActionPause))
         pause.accessibilityLabel = NSLocalizedString("Pause", comment: "")
         
+        // Close
         stop = UIBarButtonItem(barButtonSystemItem: .Stop, target: self, action: #selector(barActionClose))
         stop.accessibilityLabel = NSLocalizedString("Close", comment: "")
         popupItem.rightBarButtonItems = [ stop ]
@@ -71,7 +81,7 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         
-        //
+        // Set the song data when popup will appear
         songTitleLabel.text = song.title
         artistNameLabel.text = song.artistName
         if song.durationDesc != nil {
@@ -112,19 +122,18 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
     }
 
     func audioPlayer(audioPlayer: AudioPlayer, didChangeStateFrom from: AudioPlayerState, toState to: AudioPlayerState) {
-        
-        // now buffering
+        // Show that it is buffering
         if to == .Buffering || to == .WaitingForConnection {
             UIApplication.sharedApplication().networkActivityIndicatorVisible = true
             popupItem.leftBarButtonItems = [ spinner ]
         }
         
-        // end buffering
+        // Hide network activity when bufferings ends. Play or pause will be displayed depending on the "to" state
         if from == .Buffering || from == .WaitingForConnection {
             UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         }
         
-        // show play
+        // Show play button on bar and popup if loaded
         if to == .Stopped || to == .Paused {
             popupItem.leftBarButtonItems = [ play ]
             if isViewLoaded() {
@@ -132,7 +141,7 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
             }
         }
         
-        // show pause
+        // Show pause button on bar and popup if loaded
         if to == .Playing {
             popupItem.leftBarButtonItems = [ pause ]
             if isViewLoaded() {
@@ -140,7 +149,7 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
             }
         }
         
-        // show stop/error
+        // Show stop/error button on bar and popup if loaded
         if to == .Failed(AudioPlayerError.FoundationError(nil)) {
             popupItem.rightBarButtonItems = [  ]
             popupItem.leftBarButtonItems = [ stop ]
@@ -149,16 +158,21 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
             }
         }
         
-        // dismiss at end
+        // Dismiss player when song playing comes to an end
         if from == .Playing && to == .Stopped {
             dismissVC()
         }
     }
     
     func audioPlayer(audioPlayer: AudioPlayer, didUpdateProgressionToTime time: NSTimeInterval, percentageRead: Float) {
+        // Update progress on bar
         popupItem.progress = percentageRead/100.0
+        
         if isViewLoaded() {
+            // Update progress on popup
             progressView.progress = popupItem.progress
+            
+            // Update progress and remaning times
             progressTime.text = stringFromTimeInterval(round(time))
             if audioPlayer.currentItemDuration != nil {
                 remainingTime.text = "-" + stringFromTimeInterval(round(audioPlayer.currentItemDuration!) - round(time))
@@ -169,24 +183,32 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
     }
 
     @IBAction func togglePlayPause(sender: AnyObject) {
-        //
+        // Play, Pause, or Close depending on the player state. Showing the correct button is at delegate method
         switch audioPlayer.state {
+
         case .Stopped, .Paused:
             // Google Analytics - Event
             GoogleAnalyticsManager.event(category: gaScreenCategory, action: "Play - Popup", label: gaScreenID)
-            //
+            
+            // If current state is paused then play
             playSong()
+            
         case .Playing:
             // Google Analytics - Event
             GoogleAnalyticsManager.event(category: gaScreenCategory, action: "Pause - Popup", label: gaScreenID)
-            //
+            
+            // If current state is playing then pause
             audioPlayer.pause()
+            
         case .Failed(AudioPlayerError.FoundationError(_)):
             // Google Analytics - Event
             GoogleAnalyticsManager.event(category: gaScreenCategory, action: "Close - Popup", label: gaScreenID)
-            //
+            
+            // If error then dismiss
             dismissVC()
+            
         default:
+            // Do nothing in other states (Buffering, Waiting for connection, ...)
             return
         }
     }
@@ -195,6 +217,7 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
         // Google Analytics - Event
         GoogleAnalyticsManager.event(category: gaScreenCategory, action: "Play - Bar", label: gaScreenID)
         
+        // Play
         playSong()
     }
     
@@ -202,6 +225,7 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
         // Google Analytics - Event
         GoogleAnalyticsManager.event(category: gaScreenCategory, action: "Pause - Bar", label: gaScreenID)
         
+        // Pause
         audioPlayer.pause()
     }
     
@@ -209,23 +233,21 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
         // Google Analytics - Event
         GoogleAnalyticsManager.event(category: gaScreenCategory, action: "Close - Bar", label: gaScreenID)
         
-        //
+        // Dismiss Player
         dismissVC()
     }
     
     func playSong() {
-        
+        // If song is already loaded and paused then resume, otherwise load and play it
         if audioPlayer.state == .Paused {
             audioPlayer.resume()
         } else {
             
-            //
+            // Show that it's busy loading the song
             UIApplication.sharedApplication().networkActivityIndicatorVisible = true
             popupItem.leftBarButtonItems = [ spinner ]
-            
-            // reset ?
-      
-            // Create request
+
+            // Create request to get the temporary song URL
             let url = "\(Constants.URLs.Host)/song/play"
             let parameters = [
                 "songId": "\(song.id)"
@@ -249,41 +271,49 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
                         return
                     }
                     
-                    //
+//                    // Set the temporary song URL
 //                    let NSSongURL = NSURL(string: songURL)!
                     
-                    //local
+                    // Local URL for testing purposes
                     let NSSongURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Havana Express - Gangstas Paradise (Salsa Version).mp3", ofType:nil)!)
                     
+                    // Set the audioPlayer item with the song URL and data
                     let item = AudioItem(mediumQualitySoundURL: NSSongURL)
                     item?.title = self.song.title
                     item?.artist = self.song.artistName
                     if let image = self.song.image {
                         item?.artworkImage = image
                     }
-                    //play
+                    
+                    // Play
                     self.audioPlayer.playItem(item!)     
                 }
         }
     }
 
     func dismissVC() {
-        //
+        // Stop song from playing
         audioPlayer.stop()
+        
+        // Remove the only item to save bandwidth (wasn't really tested)
         if (audioPlayer.items != nil) {
-            audioPlayer.removeItemAtIndex(0)    //remove the only item to save bandwidth?
+            audioPlayer.removeItemAtIndex(0)
         }
+        
+        // Dismiss VC
         popupPresentationContainerViewController?.dismissPopupBarAnimated(true, completion: nil)
     }
 
     func stringFromTimeInterval(interval:NSTimeInterval) -> String {
-        //
+        // Show time in human readable format
         let ti = Int(interval)
         
+        // Calculate seconds, minutes, and hours
         let seconds = ti % 60
         let minutes = (ti / 60) % 60
         let hours = (ti / 3600)
         
+        // Return string format of the time interval
         if hours == 0 {
             return String(format: "%d:%0.2d",minutes,seconds)
         } else {

@@ -39,12 +39,14 @@ class SongViewController: UIViewController {
         songTitle.text = song.title
         artistName.text = song.artistName
         if song.description != nil {
+            
             // Custom hashtags to allow special chars in the string. Default hashtag doesn't allow symbols.
             let customHashtag = ActiveType.Custom(pattern: "#(\\S+)")
             songDescription.enabledTypes = [customHashtag]
             songDescription.customColor[customHashtag] = songDescription.hashtagColor
             songDescription.customSelectedColor[customHashtag] = songDescription.hashtagSelectedColor
             songDescription.handleCustomTap(for: customHashtag) { element in
+                
                 // Segue to the hashtag VC on click
                 let hashtagVC = self.storyboard?.instantiateViewControllerWithIdentifier("HashtagView") as! HashtagTableViewController
                 hashtagVC.hashtag = element

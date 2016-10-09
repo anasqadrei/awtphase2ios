@@ -32,9 +32,10 @@ class Artist {
             return nil
         }
         
-        // Fill artist data
+        // Create an artist with mandetory data
         let artist = Artist(id: id, name: name)
         
+        // Fill artist data
         if let url = parsedArtist["url"] as? String {
             artist.url = url
         }

@@ -49,9 +49,10 @@ class Song {
             return nil
         }
         
-        // Fill song data
+        // Create a song with mandetory data
         let song = Song(id: id, title: title, artistID: artistID, artistName: artistName)
 
+        // Fill song data
         if let url = parsedSong["url"] as? String {
             song.url = url
         }

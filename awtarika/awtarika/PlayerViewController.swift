@@ -275,7 +275,7 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
 //                    let NSSongURL = NSURL(string: songURL)!
                     
                     // Local URL for testing purposes
-                    let NSSongURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Havana Express - Gangstas Paradise (Salsa Version).mp3", ofType:nil)!)
+                    let NSSongURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Mediterranean Breeze.mp3", ofType:nil)!)
                     
                     // Set the audioPlayer item with the song URL and data
                     let item = AudioItem(mediumQualitySoundURL: NSSongURL)

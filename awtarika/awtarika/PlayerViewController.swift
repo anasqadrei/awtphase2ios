@@ -92,9 +92,22 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
         if song.image != nil {
             songImage.image = song.image
         }
+        
         // Mainly to init the progress in case of loading error
         progressView.progress = popupItem.progress
         
+        // Show correct button depending on the player state. It has to be done here as well as in the change state method for the correct initial view
+        switch audioPlayer.state {
+        case .Playing:
+            togglePlayPauseButton.setImage(UIImage(named: "playerPause"), forState: .Normal)
+        case .Paused, .Stopped:
+            togglePlayPauseButton.setImage(UIImage(named: "playerPlay"), forState: .Normal)
+        case .Failed(AudioPlayerError.FoundationError(_)):
+            togglePlayPauseButton.setImage(UIImage(named: "playerClose"), forState: .Normal)
+        default:
+            break
+        }
+
         // Ad
         adBannerView.adUnitID = Constants.AdMob.PlayerScreenAdUnitID
         adBannerView.rootViewController = self
@@ -283,6 +296,8 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
                     item?.artist = self.song.artistName
                     if let image = self.song.image {
                         item?.artworkImage = image
+                    } else {
+                        item?.artworkImage = nil
                     }
                     
                     // Play

@@ -32,6 +32,7 @@
 		E48EDC4A1DA5BDDC00ACBE1F /* GoogleAnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48EDC491DA5BDDC00ACBE1F /* GoogleAnalyticsManager.swift */; };
 		E49E535D1D6A85AF000472F8 /* ArtistsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49E535C1D6A85AF000472F8 /* ArtistsCollectionViewCell.swift */; };
 		E49E53621D6FBCFB000472F8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49E53611D6FBCFB000472F8 /* Constants.swift */; };
+		E4B9EE6D1DA7C47900578171 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4B9EE6C1DA7C47900578171 /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,7 @@
 		E48EDC491DA5BDDC00ACBE1F /* GoogleAnalyticsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleAnalyticsManager.swift; sourceTree = "<group>"; };
 		E49E535C1D6A85AF000472F8 /* ArtistsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistsCollectionViewCell.swift; sourceTree = "<group>"; };
 		E49E53611D6FBCFB000472F8 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		E4B9EE6C1DA7C47900578171 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +176,7 @@
 				E46AA9A31DA1DE9800EBED48 /* HashtagTableViewController.swift */,
 				E46AA9A51DA1EEFB00EBED48 /* DetailedSongTableViewCell.swift */,
 				E40B54E71CBC709800A2F414 /* Assets.xcassets */,
+				E4B9EE6C1DA7C47900578171 /* Launch Screen.storyboard */,
 				E40B54EC1CBC709800A2F414 /* Info.plist */,
 				E45D30491DA0664400B46957 /* GoogleService-Info.plist */,
 				E4608B0D1D7CFF6800AA65A9 /* PhotosDataManager.swift */,
@@ -319,6 +322,7 @@
 			files = (
 				E40B54E81CBC709800A2F414 /* Assets.xcassets in Resources */,
 				E4608B0C1D7CF4E900AA65A9 /* Podfile in Resources */,
+				E4B9EE6D1DA7C47900578171 /* Launch Screen.storyboard in Resources */,
 				E4608B131D88DB2E00AA65A9 /* Cartfile in Resources */,
 				E4608B181D88E00D00AA65A9 /* Cartfile.resolved in Resources */,
 				E41A4F5D1D921ED1002BE9CD /* Havana Express - Gangstas Paradise (Salsa Version).mp3 in Resources */,

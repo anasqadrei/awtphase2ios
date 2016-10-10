@@ -7,21 +7,21 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>28762464156-3lfkg5441hg5an7ftmc2dokikn37i5qs.apps.googleusercontent.com</string>
+	<string>281691024242-2lvh1rnjidrk801a17oeh28frc7lb7ns.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.28762464156-3lfkg5441hg5an7ftmc2dokikn37i5qs</string>
+	<string>com.googleusercontent.apps.281691024242-2lvh1rnjidrk801a17oeh28frc7lb7ns</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCBYuP_sjrScqWJCPomz_dZpmv5s44CeF0</string>
+	<string>AIzaSyCJdvKXpfkSyoNwqIt8WAgkMG4cF6i-4J4</string>
 	<key>GCM_SENDER_ID</key>
-	<string>28762464156</string>
+	<string>281691024242</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.awtarika.app</string>
+	<string>com.awtarika.ios.app.production</string>
 	<key>PROJECT_ID</key>
-	<string>admob-app-id-9095334088</string>
+	<string>awtarika-30c65</string>
 	<key>STORAGE_BUCKET</key>
-	<string>admob-app-id-9095334088.appspot.com</string>
+	<string>awtarika-30c65.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<true/>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -33,10 +33,10 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:28762464156:ios:afc0aa924f073fd0</string>
+	<string>1:281691024242:ios:21f2733c6baa1a4b</string>
 	<key>DATABASE_URL</key>
-	<string>https://admob-app-id-9095334088.firebaseio.com</string>
+	<string>https://awtarika-30c65.firebaseio.com</string>
 	<key>TRACKING_ID</key>
-	<string>UA-42986486-4</string>
+	<string>UA-24454820-3</string>
 </dict>
 </plist>

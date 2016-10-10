@@ -283,13 +283,10 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
                         UIApplication.sharedApplication().networkActivityIndicatorVisible = false
                         return
                     }
-                    
-//                    // Set the temporary song URL
-//                    let NSSongURL = NSURL(string: songURL)!
-                    
-                    // Local URL for testing purposes
-                    let NSSongURL = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("Mediterranean Breeze.mp3", ofType:nil)!)
-              
+
+                    // Set the temporary song URL
+                    let NSSongURL = NSURL(string: songURL)!
+
                     // Set the audioPlayer item with the song URL and data
                     let item = AudioItem(mediumQualitySoundURL: NSSongURL)
                     item?.title = self.song.title

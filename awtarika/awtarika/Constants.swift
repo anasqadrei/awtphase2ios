@@ -24,6 +24,5 @@ struct Constants {
     
     struct LogEntries {
         static let Token = "e2043c8f-c402-48dc-8800-48bab57bcfa5"
-//        static let Token = "e2043c8f-c402-48dc-8800-48bab57bcfa5"// add live
     }
 }

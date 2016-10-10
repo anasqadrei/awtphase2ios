@@ -29,7 +29,6 @@
 		E46DA3151D751977001D4EBC /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46DA3141D751977001D4EBC /* Song.swift */; };
 		E46DA3171D752265001D4EBC /* SongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46DA3161D752265001D4EBC /* SongTableViewCell.swift */; };
 		E48EDC4A1DA5BDDC00ACBE1F /* GoogleAnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48EDC491DA5BDDC00ACBE1F /* GoogleAnalyticsManager.swift */; };
-		E49651311DABC4AD0043007D /* Mediterranean Breeze.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E49651301DABC4AD0043007D /* Mediterranean Breeze.mp3 */; };
 		E49E535D1D6A85AF000472F8 /* ArtistsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49E535C1D6A85AF000472F8 /* ArtistsCollectionViewCell.swift */; };
 		E49E53621D6FBCFB000472F8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E49E53611D6FBCFB000472F8 /* Constants.swift */; };
 		E4B9EE6D1DA7C47900578171 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4B9EE6C1DA7C47900578171 /* Launch Screen.storyboard */; };
@@ -84,7 +83,6 @@
 		E46DA3141D751977001D4EBC /* Song.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
 		E46DA3161D752265001D4EBC /* SongTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongTableViewCell.swift; sourceTree = "<group>"; };
 		E48EDC491DA5BDDC00ACBE1F /* GoogleAnalyticsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleAnalyticsManager.swift; sourceTree = "<group>"; };
-		E49651301DABC4AD0043007D /* Mediterranean Breeze.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Mediterranean Breeze.mp3"; sourceTree = "<group>"; };
 		E49E535C1D6A85AF000472F8 /* ArtistsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistsCollectionViewCell.swift; sourceTree = "<group>"; };
 		E49E53611D6FBCFB000472F8 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E4B9EE6C1DA7C47900578171 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -183,7 +181,6 @@
 				E48EDC491DA5BDDC00ACBE1F /* GoogleAnalyticsManager.swift */,
 				E49E53611D6FBCFB000472F8 /* Constants.swift */,
 				E425C1A51DA3837A006D1F80 /* BridgingHeader.h */,
-				E49651301DABC4AD0043007D /* Mediterranean Breeze.mp3 */,
 			);
 			path = awtarika;
 			sourceTree = "<group>";
@@ -322,7 +319,6 @@
 			files = (
 				E40B54E81CBC709800A2F414 /* Assets.xcassets in Resources */,
 				E45BD2F81DAB61D2002EC821 /* GoogleService-Info.plist in Resources */,
-				E49651311DABC4AD0043007D /* Mediterranean Breeze.mp3 in Resources */,
 				E4608B0C1D7CF4E900AA65A9 /* Podfile in Resources */,
 				E4B9EE6D1DA7C47900578171 /* Launch Screen.storyboard in Resources */,
 				E4608B131D88DB2E00AA65A9 /* Cartfile in Resources */,

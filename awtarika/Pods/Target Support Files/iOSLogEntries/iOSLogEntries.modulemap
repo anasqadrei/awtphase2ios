@@ -1,0 +1,6 @@
+framework module iOSLogEntries {
+  umbrella header "iOSLogEntries-umbrella.h"
+
+  export *
+  module * { export * }
+}

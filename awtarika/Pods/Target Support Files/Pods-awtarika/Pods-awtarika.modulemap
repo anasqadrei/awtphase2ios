@@ -1,0 +1,6 @@
+framework module Pods_awtarika {
+  umbrella header "Pods-awtarika-umbrella.h"
+
+  export *
+  module * { export * }
+}

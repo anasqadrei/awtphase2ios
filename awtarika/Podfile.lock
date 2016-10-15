@@ -3,18 +3,17 @@ PODS:
   - Alamofire (3.5.1)
   - AlamofireImage (2.5.0):
     - Alamofire (~> 3.5)
-  - Firebase/AdMob (3.7.0):
+  - Firebase/AdMob (3.7.1):
     - Firebase/Core
     - Google-Mobile-Ads-SDK (= 7.12.1)
-  - Firebase/Core (3.7.0):
-    - FirebaseAnalytics (= 3.4.3)
+  - Firebase/Core (3.7.1):
+    - FirebaseAnalytics (= 3.4.4)
     - FirebaseCore (= 3.4.3)
-  - FirebaseAnalytics (3.4.3):
+  - FirebaseAnalytics (3.4.4):
     - FirebaseCore (~> 3.4)
     - FirebaseInstanceID (~> 1.0)
     - GoogleInterchangeUtilities (~> 1.2)
     - GoogleSymbolUtilities (~> 1.1)
-    - GoogleUtilities (~> 1.3)
   - FirebaseCore (3.4.3):
     - GoogleInterchangeUtilities (~> 1.2)
     - GoogleUtilities (~> 1.2)
@@ -35,7 +34,7 @@ PODS:
   - KDEAudioPlayer (0.9.1)
 
 DEPENDENCIES:
-  - ActiveLabel
+  - ActiveLabel (~> 0.6.2)
   - Alamofire (~> 3.0)
   - AlamofireImage (~> 2.0)
   - Firebase/AdMob
@@ -48,8 +47,8 @@ SPEC CHECKSUMS:
   ActiveLabel: 2394eb48a2e31644ea90d6543c17bffe1d06f549
   Alamofire: 0dfba1184a543e2aa160f4e39cac4e8aba48d223
   AlamofireImage: 2d34936e5201270bb17a316a786e90e83b4a249d
-  Firebase: 3875e140d77c7572c6d4852faf94144ffcdb0704
-  FirebaseAnalytics: 02d0aed8c6246a9c8683ac3e9825c67ceb657bde
+  Firebase: be473484f0d515e72ffd04acf22f981773c23e58
+  FirebaseAnalytics: 0533a00b681e08fd0b2cd0444b7ddf0ef9fd7a1a
   FirebaseCore: 5a885548bbc5f0c410b04f8e9ac9d73ff1221907
   FirebaseInstanceID: ba1e640935235e5fac39dfa816fe7660e72e1a8a
   Google: 813c467362eabc11385f5a5cc9ad0cb651a58f4e
@@ -61,6 +60,6 @@ SPEC CHECKSUMS:
   iOSLogEntries: f7eb65033a09b8850e092d0aed3ad75d3553f1f1
   KDEAudioPlayer: c052553e051974a39fd2e5e07d7f575ea3f557c2
 
-PODFILE CHECKSUM: be4f9ebe24a6757f622a65bfabaf8497d70a41b6
+PODFILE CHECKSUM: 3a193f56d5f5e72857cdffc3beaa36b692195cc8
 
 COCOAPODS: 1.0.1

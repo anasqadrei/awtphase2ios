@@ -73,13 +73,14 @@ class ArtistViewController: UITableViewController {
         }
     }
 
-    @IBAction func share(sender: AnyObject) {
+    @IBAction func share(sender: UIBarButtonItem) {
         // Google Analytics - Event
         GoogleAnalyticsManager.event(category: gaScreenCategory, action: "Share", label: gaScreenID)
         
         // Share artist URL
         if let url = artist.url {
-            let shareVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+            let shareVC = UIActivityViewController(activityItems: [artist.name, url], applicationActivities: nil)
+            shareVC.popoverPresentationController?.barButtonItem = sender
             self.presentViewController(shareVC, animated: true, completion: nil)
         } else {
             LELog.log("\(self) share(): Artist \(artist.id) doesn't have a url.")

@@ -85,13 +85,14 @@ class SongViewController: UIViewController {
         GoogleAnalyticsManager.screenView(name: name)
     }
     
-    @IBAction func share(sender: AnyObject) {
+    @IBAction func share(sender: UIBarButtonItem) {
         // Google Analytics - Event
         GoogleAnalyticsManager.event(category: gaScreenCategory, action: "Share", label: gaScreenID)
         
         // Share song URL
         if let url = song.url {
-            let shareVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+            let shareVC = UIActivityViewController(activityItems: ["\(song.title) - \(song.artistName)", url], applicationActivities: nil)
+            shareVC.popoverPresentationController?.barButtonItem = sender
             self.presentViewController(shareVC, animated: true, completion: nil)
         } else {
             LELog.log("\(self) share(): Song \(song.id) doesn't have a url.")

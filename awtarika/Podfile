@@ -9,5 +9,5 @@ target 'awtarika' do
     pod 'Google/Analytics'
     pod 'iOSLogEntries'
     pod 'KDEAudioPlayer'
-    pod 'ActiveLabel'
+    pod 'ActiveLabel', '~> 0.6.2'
 end

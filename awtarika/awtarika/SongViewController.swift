@@ -91,7 +91,7 @@ class SongViewController: UIViewController {
         
         // Share song URL
         if let url = song.url {
-            let shareVC = UIActivityViewController(activityItems: ["\(song.title) - \(song.artistName)", url], applicationActivities: nil)
+            let shareVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
             shareVC.popoverPresentationController?.barButtonItem = sender
             self.presentViewController(shareVC, animated: true, completion: nil)
         } else {

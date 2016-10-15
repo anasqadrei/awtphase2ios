@@ -949,9 +949,6 @@
 					88704C02B695D10F0FFD6C4088DE7BC9 = {
 						LastSwiftMigration = 0800;
 					};
-					8EAA23A2E2B57CDCD508CD43176D159B = {
-						LastSwiftMigration = 0800;
-					};
 					C438103BD910F6C2BBAC7D0450729D1A = {
 						LastSwiftMigration = 0800;
 					};
@@ -1174,7 +1171,6 @@
 				PRODUCT_NAME = iOSLogEntries;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1234,7 +1230,6 @@
 				PRODUCT_NAME = iOSLogEntries;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";

@@ -1,65 +1,69 @@
 PODS:
-  - ActiveLabel (0.6.2)
-  - Alamofire (3.5.1)
-  - AlamofireImage (2.5.0):
-    - Alamofire (~> 3.5)
-  - Firebase/AdMob (3.7.1):
+  - ActiveLabel (0.7.1)
+  - Alamofire (4.3.0)
+  - AlamofireImage (3.2.0):
+    - Alamofire (~> 4.1)
+  - Firebase/AdMob (3.13.0):
     - Firebase/Core
-    - Google-Mobile-Ads-SDK (= 7.12.1)
-  - Firebase/Core (3.7.1):
-    - FirebaseAnalytics (= 3.4.4)
-    - FirebaseCore (= 3.4.3)
-  - FirebaseAnalytics (3.4.4):
-    - FirebaseCore (~> 3.4)
+    - Google-Mobile-Ads-SDK (= 7.17.0)
+  - Firebase/Core (3.13.0):
+    - FirebaseAnalytics (= 3.7.0)
+    - FirebaseCore (= 3.5.0)
+  - FirebaseAnalytics (3.7.0):
+    - FirebaseCore (~> 3.5)
     - FirebaseInstanceID (~> 1.0)
-    - GoogleInterchangeUtilities (~> 1.2)
-    - GoogleSymbolUtilities (~> 1.1)
-  - FirebaseCore (3.4.3):
-    - GoogleInterchangeUtilities (~> 1.2)
-    - GoogleUtilities (~> 1.2)
-  - FirebaseInstanceID (1.0.8)
-  - Google-Mobile-Ads-SDK (7.12.1)
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseCore (3.5.0):
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseInstanceID (1.0.9)
+  - Google-Mobile-Ads-SDK (7.17.0)
   - Google/Analytics (3.0.3):
     - Google/Core
     - GoogleAnalytics (~> 3.12)
   - Google/Core (3.0.3):
     - FirebaseAnalytics (~> 3.2)
   - GoogleAnalytics (3.17.0)
-  - GoogleInterchangeUtilities (1.2.2):
-    - GoogleSymbolUtilities (~> 1.1)
-  - GoogleSymbolUtilities (1.1.2)
-  - GoogleUtilities (1.3.2):
-    - GoogleSymbolUtilities (~> 1.1)
+  - GoogleToolboxForMac/Defines (2.1.1)
+  - GoogleToolboxForMac/NSData+zlib (2.1.1):
+    - GoogleToolboxForMac/Defines (= 2.1.1)
   - iOSLogEntries (1.2)
-  - KDEAudioPlayer (0.9.1)
+  - KDEAudioPlayer (1.1.0-beta)
 
 DEPENDENCIES:
-  - ActiveLabel (~> 0.6.2)
-  - Alamofire (~> 3.0)
-  - AlamofireImage (~> 2.0)
+  - ActiveLabel
+  - Alamofire (~> 4.3)
+  - AlamofireImage (~> 3.1)
   - Firebase/AdMob
   - Firebase/Core
   - Google/Analytics
   - iOSLogEntries
-  - KDEAudioPlayer
+  - KDEAudioPlayer (from `https://github.com/delannoyk/AudioPlayer`, branch `master`)
+
+EXTERNAL SOURCES:
+  KDEAudioPlayer:
+    :branch: master
+    :git: https://github.com/delannoyk/AudioPlayer
+
+CHECKOUT OPTIONS:
+  KDEAudioPlayer:
+    :commit: c77ce6ec604588c97b558c1b4884b701c2241a58
+    :git: https://github.com/delannoyk/AudioPlayer
 
 SPEC CHECKSUMS:
-  ActiveLabel: 2394eb48a2e31644ea90d6543c17bffe1d06f549
-  Alamofire: 0dfba1184a543e2aa160f4e39cac4e8aba48d223
-  AlamofireImage: 2d34936e5201270bb17a316a786e90e83b4a249d
-  Firebase: be473484f0d515e72ffd04acf22f981773c23e58
-  FirebaseAnalytics: 0533a00b681e08fd0b2cd0444b7ddf0ef9fd7a1a
-  FirebaseCore: 5a885548bbc5f0c410b04f8e9ac9d73ff1221907
-  FirebaseInstanceID: ba1e640935235e5fac39dfa816fe7660e72e1a8a
+  ActiveLabel: 68625f22775f51c31bb691ca8de20f1e5a3bc825
+  Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
+  AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
+  Firebase: 5bc34d7b5ff5792e3386c8b28dc6265deeab0da4
+  FirebaseAnalytics: 0d1b7d81d5021155be37702a94ba1ec16d45365d
+  FirebaseCore: 1c0a13bf59bb95cdd19577252499f0ec6a03e999
+  FirebaseInstanceID: 2d0518b1378fe9d685ef40cbdd63d2fdc1125339
   Google: 813c467362eabc11385f5a5cc9ad0cb651a58f4e
-  Google-Mobile-Ads-SDK: 542eb24c1ce6c8fd5084ee9572fd9dcd2d06065a
+  Google-Mobile-Ads-SDK: a8bf4211624999b73e4184be516f94770b139525
   GoogleAnalytics: f42cc53a87a51fe94334821868d9c8481ff47a7b
-  GoogleInterchangeUtilities: d5bc4d88d5b661ab72f9d70c58d02ca8c27ad1f7
-  GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
-  GoogleUtilities: 8bbc733218aad26306f9d4a253823986110e3358
+  GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   iOSLogEntries: f7eb65033a09b8850e092d0aed3ad75d3553f1f1
-  KDEAudioPlayer: c052553e051974a39fd2e5e07d7f575ea3f557c2
+  KDEAudioPlayer: bdd7eef4c5a03b0fffa7182208f141f564d9def1
 
-PODFILE CHECKSUM: 3a193f56d5f5e72857cdffc3beaa36b692195cc8
+PODFILE CHECKSUM: dfd0063c8e69b74c6689a4aff7d8fa1d5f5af59d
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.2.0

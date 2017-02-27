@@ -10,20 +10,22 @@ import Foundation
 
 class GoogleAnalyticsManager {
     
-    static func screenView(name name: String) {
+    static func screenView(name: String) {
         // Track a screen
-        let tracker = GAI.sharedInstance().defaultTracker
+        guard let tracker = GAI.sharedInstance().defaultTracker else { return }
         tracker.allowIDFACollection = true
         tracker.set(kGAIScreenName, value: name)
-        let builder = GAIDictionaryBuilder.createScreenView()
+        
+        guard let builder = GAIDictionaryBuilder.createScreenView() else { return }
         tracker.send(builder.build() as [NSObject : AnyObject])
     }
     
-    static func event(category category: String, action: String, label: String? = nil, value: NSNumber? = nil) {
+    static func event(category: String, action: String, label: String? = nil, value: NSNumber? = nil) {
         // Track an event
-        let tracker = GAI.sharedInstance().defaultTracker
+        guard let tracker = GAI.sharedInstance().defaultTracker else { return }
         tracker.allowIDFACollection = true
-        let event = GAIDictionaryBuilder.createEventWithCategory(category, action: action, label: label, value: value)
-        tracker.send(event.build() as [NSObject : AnyObject])
+        
+        guard let builder = GAIDictionaryBuilder.createEvent(withCategory: category, action: action, label: label, value: value) else { return }
+        tracker.send(builder.build() as [NSObject : AnyObject])
     }
 }

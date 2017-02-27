@@ -25,10 +25,10 @@ class Artist {
         songsPageSize = 20
     }
     
-    static func createArtist(parsedArtist: [String:AnyObject]) -> Artist? {
+    static func createArtist(_ parsedArtist: [String:AnyObject]) -> Artist? {
         
         // GUARD: Are the artist "_id" and "name" keys in our result?
-        guard let id = parsedArtist["_id"] as? Int, name = parsedArtist["name"] as? String else {
+        guard let id = parsedArtist["_id"] as? Int, let name = parsedArtist["name"] as? String else {
             return nil
         }
         

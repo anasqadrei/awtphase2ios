@@ -24,14 +24,14 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
     @IBOutlet weak var togglePlayPauseButton: UIButton!
     @IBOutlet weak var adBannerView: GADBannerView!
     
-    let audioPlayer = (UIApplication.sharedApplication().delegate as! AppDelegate).audioPlayer
+    let audioPlayer = (UIApplication.shared.delegate as! AppDelegate).audioPlayer
     
     var play: UIBarButtonItem!
     var pause: UIBarButtonItem!
     var stop: UIBarButtonItem!
     var spinner: UIBarButtonItem!
 
-    var gaScreenCategory = "Player"
+    let gaScreenCategory = "Player"
     var gaScreenID: String!
     
     var song: Song! {
@@ -55,8 +55,8 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
         audioPlayer.delegate = self
 
         // Bar custom design
-        LNPopupBar.appearanceWhenContainedInInstancesOfClasses([UINavigationController.self]).barStyle = .Black
-        LNPopupBar.appearanceWhenContainedInInstancesOfClasses([UINavigationController.self]).titleTextAttributes = [NSFontAttributeName: UIFont.systemFontOfSize(16)]
+        LNPopupBar.appearance(whenContainedInInstancesOf: [UINavigationController.self]).barStyle = .black
+        LNPopupBar.appearance(whenContainedInInstancesOf: [UINavigationController.self]).titleTextAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 16)]
         
         // Prepare bar buttons
         // Spinner
@@ -65,20 +65,20 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
         spinner = UIBarButtonItem(customView: activityIndicatorView)
         
         // Play
-        play = UIBarButtonItem(barButtonSystemItem: .Play, target: self, action: #selector(barActionPlay))
+        play = UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(barActionPlay))
         play.accessibilityLabel = NSLocalizedString("Play", comment: "")
         
         // Pause
-        pause = UIBarButtonItem(barButtonSystemItem: .Pause, target: self, action: #selector(barActionPause))
+        pause = UIBarButtonItem(barButtonSystemItem: .pause, target: self, action: #selector(barActionPause))
         pause.accessibilityLabel = NSLocalizedString("Pause", comment: "")
         
         // Close
-        stop = UIBarButtonItem(barButtonSystemItem: .Stop, target: self, action: #selector(barActionClose))
+        stop = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(barActionClose))
         stop.accessibilityLabel = NSLocalizedString("Close", comment: "")
         popupItem.rightBarButtonItems = [ stop ]
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
         // Set the song data when popup will appear
@@ -98,12 +98,12 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
         
         // Show correct button depending on the player state. It has to be done here as well as in the change state method for the correct initial view
         switch audioPlayer.state {
-        case .Playing:
-            togglePlayPauseButton.setImage(UIImage(named: "playerPause"), forState: .Normal)
-        case .Paused, .Stopped:
-            togglePlayPauseButton.setImage(UIImage(named: "playerPlay"), forState: .Normal)
-        case .Failed(AudioPlayerError.FoundationError(_)):
-            togglePlayPauseButton.setImage(UIImage(named: "playerClose"), forState: .Normal)
+        case .playing:
+            togglePlayPauseButton.setImage(UIImage(named: "playerPause"), for: UIControlState())
+        case .paused, .stopped:
+            togglePlayPauseButton.setImage(UIImage(named: "playerPlay"), for: UIControlState())
+        case .failed(AudioPlayerError.foundationError(_)):
+            togglePlayPauseButton.setImage(UIImage(named: "playerClose"), for: UIControlState())
         default:
             break
         }
@@ -113,14 +113,14 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
         adBannerView.rootViewController = self
         let adRequest = GADRequest()
         adRequest.testDevices = [kDFPSimulatorID, Constants.AdMob.TestDeviceAnasIPhone4S]
-        adBannerView.loadRequest(adRequest)
+        adBannerView.load(adRequest)
         
         // Google Analytics - Screen View
-        let name = "\(gaScreenCategory): \(gaScreenID)"
+        let name = "\(gaScreenCategory): \(gaScreenID!)"
         GoogleAnalyticsManager.screenView(name: name)
     }
     
-    func audioPlayer(audioPlayer: AudioPlayer, willStartPlayingItem item: AudioItem) {
+    func audioPlayer(_ audioPlayer: AudioPlayer, willStartPlaying item: AudioItem) {
         // Increment counters when the song is to be played.
         let url = "\(Constants.URLs.Host)/song/play"
         let parameters = [
@@ -128,60 +128,65 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
             "artistId": "\(song.artistID)"
         ]
         let headers = ["Accept": "application/json"]
-        Alamofire.request(.POST, url, parameters: parameters, headers: headers, encoding: .JSON)
         
+        print("here")
+        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+            .responseJSON { response in
+                // result of the call doesn't matter much
+        }
+       
         // Update local counter
         song.playsCount += 1
     }
 
-    func audioPlayer(audioPlayer: AudioPlayer, didChangeStateFrom from: AudioPlayerState, toState to: AudioPlayerState) {
+    func audioPlayer(_ audioPlayer: AudioPlayer, didChangeStateFrom from: AudioPlayerState, to state: AudioPlayerState) {
         // Show that it is buffering
-        if to == .Buffering || to == .WaitingForConnection {
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        if state == .buffering || state == .waitingForConnection {
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
             popupItem.leftBarButtonItems = [ spinner ]
         }
         
         // Hide network activity when bufferings ends. Play or pause will be displayed depending on the "to" state
-        if from == .Buffering || from == .WaitingForConnection {
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        if from == .buffering || from == .waitingForConnection {
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
         }
         
         // Show play button on bar and popup if loaded
-        if to == .Stopped || to == .Paused {
+        if state == .stopped || state == .paused {
             popupItem.leftBarButtonItems = [ play ]
-            if isViewLoaded() {
-                togglePlayPauseButton.setImage(UIImage(named: "playerPlay"), forState: .Normal)
+            if isViewLoaded {
+                togglePlayPauseButton.setImage(UIImage(named: "playerPlay"), for: UIControlState())
             }
         }
         
         // Show pause button on bar and popup if loaded
-        if to == .Playing {
+        if state == .playing {
             popupItem.leftBarButtonItems = [ pause ]
-            if isViewLoaded() {
-                togglePlayPauseButton.setImage(UIImage(named: "playerPause"), forState: .Normal)
+            if isViewLoaded {
+                togglePlayPauseButton.setImage(UIImage(named: "playerPause"), for: UIControlState())
             }
         }
         
         // Show stop/error button on bar and popup if loaded
-        if to == .Failed(AudioPlayerError.FoundationError(nil)) {
+        if case .failed = state {
             popupItem.rightBarButtonItems = [  ]
             popupItem.leftBarButtonItems = [ stop ]
-            if isViewLoaded() {
-                togglePlayPauseButton.setImage(UIImage(named: "playerClose"), forState: .Normal)
+            if isViewLoaded {
+                togglePlayPauseButton.setImage(UIImage(named: "playerClose"), for: UIControlState())
             }
         }
         
         // Dismiss player when song playing comes to an end
-        if from == .Playing && to == .Stopped {
+        if from == .playing && state == .stopped {
             dismissVC()
         }
     }
     
-    func audioPlayer(audioPlayer: AudioPlayer, didUpdateProgressionToTime time: NSTimeInterval, percentageRead: Float) {
+    func audioPlayer(_ audioPlayer: AudioPlayer, didUpdateProgressionTo time: TimeInterval, percentageRead: Float) {
         // Update progress on bar
         popupItem.progress = percentageRead/100.0
         
-        if isViewLoaded() {
+        if isViewLoaded {
             // Update progress on popup
             progressView.progress = popupItem.progress
             
@@ -195,25 +200,25 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
         }
     }
 
-    @IBAction func togglePlayPause(sender: AnyObject) {
+    @IBAction func togglePlayPause(_ sender: AnyObject) {
         // Play, Pause, or Close depending on the player state. Showing the correct button is at delegate method
         switch audioPlayer.state {
 
-        case .Stopped, .Paused:
+        case .stopped, .paused:
             // Google Analytics - Event
             GoogleAnalyticsManager.event(category: gaScreenCategory, action: "Play - Popup", label: gaScreenID)
             
             // If current state is paused then play
             playSong()
             
-        case .Playing:
+        case .playing:
             // Google Analytics - Event
             GoogleAnalyticsManager.event(category: gaScreenCategory, action: "Pause - Popup", label: gaScreenID)
             
             // If current state is playing then pause
             audioPlayer.pause()
             
-        case .Failed(AudioPlayerError.FoundationError(_)):
+        case .failed(AudioPlayerError.foundationError(_)):
             // Google Analytics - Event
             GoogleAnalyticsManager.event(category: gaScreenCategory, action: "Close - Popup", label: gaScreenID)
             
@@ -252,12 +257,12 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
     
     func playSong() {
         // If song is already loaded and paused then resume, otherwise load and play it
-        if audioPlayer.state == .Paused {
+        if audioPlayer.state == .paused {
             audioPlayer.resume()
         } else {
             
             // Show that it's busy loading the song
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
             popupItem.leftBarButtonItems = [ spinner ]
 
             // Create request to get the temporary song URL
@@ -266,29 +271,26 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
                 "songId": "\(song.id)"
             ]
             let headers = ["Accept": "application/json"]
-            Alamofire.request(.GET, url, parameters: parameters, headers: headers)
+            Alamofire.request(url, method: .get, parameters: parameters, headers: headers)
                 .validate()
                 .responseJSON { response in
                     
                     // GUARD: Data parsed to JSON?
-                    guard let parsedResult = response.result.value else {
-                        LELog.log("\(self) playSong(\(self.song.id)): Couldn't serialize response.")
-                        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                    guard let parsedResult = response.result.value as? [String: Any] else {
+                        LELog.log("\(self) playSong(\(self.song.id)): Couldn't serialize response." as NSObject!)
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
                         return
                     }
                     
                     // GUARD: Are the "photos" and "photo" keys in our result?
-                    guard let songURL = parsedResult["url"] as? String else {
-                        LELog.log("\(self) playSong(\(self.song.id)): Couldn't find key 'url' in \(parsedResult)")
-                        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                    guard let songURL = URL(string: (parsedResult["url"] as? String)!) else {
+                        LELog.log("\(self) playSong(\(self.song.id)): Couldn't find key 'url' in \(parsedResult)" as NSObject!)
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
                         return
                     }
 
-                    // Set the temporary song URL
-                    let NSSongURL = NSURL(string: songURL)!
-
                     // Set the audioPlayer item with the song URL and data
-                    let item = AudioItem(mediumQualitySoundURL: NSSongURL)
+                    let item = AudioItem(mediumQualitySoundURL: songURL)
                     item?.title = self.song.title
                     item?.artist = self.song.artistName
                     if let image = self.song.image {
@@ -298,7 +300,7 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
                     }
                     
                     // Play
-                    self.audioPlayer.playItem(item!)     
+                    self.audioPlayer.play(item: item!)
                 }
         }
     }
@@ -309,14 +311,14 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
         
         // Remove the only item to save bandwidth (wasn't really tested)
         if (audioPlayer.items != nil) {
-            audioPlayer.removeItemAtIndex(0)
+            audioPlayer.removeItem(at: 0)
         }
         
         // Dismiss VC
-        popupPresentationContainerViewController?.dismissPopupBarAnimated(true, completion: nil)
+        popupPresentationContainer?.dismissPopupBar(animated: true, completion: nil)
     }
 
-    func stringFromTimeInterval(interval:NSTimeInterval) -> String {
+    func stringFromTimeInterval(_ interval:TimeInterval) -> String {
         // Show time in human readable format
         let ti = Int(interval)
         

@@ -33,7 +33,7 @@ class Song {
         likesCount = 0
     }
     
-    static func createSong(parsedSong: [String:AnyObject]) -> Song? {
+    static func createSong(_ parsedSong: [String:AnyObject]) -> Song? {
         
         // GUARD: Are the song "_id", "title", and "artist.name" keys in our result?
         guard let id = parsedSong["_id"] as? Int else {

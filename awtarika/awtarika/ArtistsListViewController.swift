@@ -21,7 +21,7 @@ class ArtistsListViewController: UICollectionViewController {
     var fetching = false
     let defaultSort = "-songsCount"
     
-    var gaScreenCategory = "Artists List"
+    let gaScreenCategory = "Artists List"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +32,7 @@ class ArtistsListViewController: UICollectionViewController {
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
         // Google Analytics - Screen View
@@ -48,14 +48,14 @@ class ArtistsListViewController: UICollectionViewController {
         let itemWidth = (view.frame.size.width - (cols - 1) * flowLayout.minimumInteritemSpacing)/cols
         let itemHeight = itemWidth * (6.0/5.0)
 
-        flowLayout.itemSize = CGSizeMake(itemWidth, itemHeight)
+        flowLayout.itemSize = CGSize(width: itemWidth, height: itemHeight)
     }
 
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return artistsList.count
     }
     
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // For scrolling purposes, fetch more artists if:
         //   Not busy fetching
         //   Still more pages to fetch
@@ -65,20 +65,20 @@ class ArtistsListViewController: UICollectionViewController {
         }
         
         // Build the cell
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ArtistsCell", forIndexPath: indexPath) as! ArtistsCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ArtistsCell", for: indexPath) as! ArtistsCollectionViewCell
         cell.configure(artistsList[indexPath.row])
         return cell
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Assign the artist of the destination VC
         if segue.identifier == "ArtistsListToArtist", let artistCell = sender as! ArtistsCollectionViewCell? {
-            let artistVC = segue.destinationViewController as! ArtistViewController
+            let artistVC = segue.destination as! ArtistViewController
             artistVC.artist = artistCell.artist
         }
     }
 
-    private func getArtistsList(page: Int, sort: String) {
+    fileprivate func getArtistsList(_ page: Int, sort: String) {
         // Set busy fetching
         configureUI(true)
         
@@ -89,13 +89,13 @@ class ArtistsListViewController: UICollectionViewController {
             "sort": "\(sort)"
         ]
         let headers = ["Accept": "application/json"]
-        Alamofire.request(.GET, url, parameters: parameters, headers: headers)
+        Alamofire.request(url, method: .get, parameters: parameters, headers: headers)
             .validate()
             .responseJSON { response in
                 
                 // GUARD: Data parsed to JSON?
-                guard let parsedResult = response.result.value else {
-                    LELog.log("\(self) getArtistsList(\(page),\(sort)): Couldn't serialize response.")
+                guard let parsedResult = response.result.value as? [String: Any] else {
+                    LELog.log("\(self) getArtistsList(\(page),\(sort)): Couldn't serialize response." as NSObject!)
                     self.configureUI(false)
                     return
                 }
@@ -103,7 +103,7 @@ class ArtistsListViewController: UICollectionViewController {
                 // GUARD: Are the "photos" and "photo" keys in our result?
                 guard let parsedArtistsList = parsedResult["artistsList"] as? [[String:AnyObject]],
                     let totalPages = parsedResult["totalPages"] as? Int else {
-                        LELog.log("\(self) getArtistsList(\(page),\(sort)): Couldn't find keys 'artistsList' and 'totalPages' in \(parsedResult)")
+                        LELog.log("\(self) getArtistsList(\(page),\(sort)): Couldn't find keys 'artistsList' and 'totalPages' in \(parsedResult)" as NSObject!)
                         self.configureUI(false)
                         return
                 }
@@ -115,7 +115,7 @@ class ArtistsListViewController: UICollectionViewController {
                     if let artist = Artist.createArtist(parsedArtist) {
                         self.artistsList.append(artist)
                     } else {
-                        LELog.log("\(self) getArtistsList(\(page),\(sort)): An artist couldn't be serialized.")
+                        LELog.log("\(self) getArtistsList(\(page),\(sort)): An artist couldn't be serialized." as NSObject!)
                     }
                 }
                 
@@ -129,9 +129,9 @@ class ArtistsListViewController: UICollectionViewController {
         }
     }
     
-    private func configureUI(busy: Bool) {
+    fileprivate func configureUI(_ busy: Bool) {
         // Set UI and fetching to busy or not
         fetching = busy
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = busy
+        UIApplication.shared.isNetworkActivityIndicatorVisible = busy
     }
 }

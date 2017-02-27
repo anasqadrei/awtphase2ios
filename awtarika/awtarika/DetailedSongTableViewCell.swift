@@ -12,7 +12,7 @@ class DetailedSongTableViewCell: SongTableViewCell {
 
     @IBOutlet weak var artistName: UILabel!
 
-    override func configure(song: Song) {
+    override func configure(_ song: Song) {
         super.configure(song)
         
         // Fill extra details (artist name)

@@ -16,7 +16,7 @@ class SongTableViewCell: UITableViewCell {
     
     var song: Song!
 
-    func configure(song: Song) {
+    func configure(_ song: Song) {
         // Save the song in the cell to be passed later on to song VC
         self.song = song
         

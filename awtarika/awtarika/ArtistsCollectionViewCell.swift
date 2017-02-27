@@ -25,7 +25,7 @@ class ArtistsCollectionViewCell: UICollectionViewCell {
         imageView.clipsToBounds = true
     }
 
-    func configure(artist: Artist) {
+    func configure(_ artist: Artist) {
         // Save the artist in the cell to be passed later on to artist VC
         self.artist = artist
         
@@ -34,14 +34,14 @@ class ArtistsCollectionViewCell: UICollectionViewCell {
         populate()
     }
     
-    private func reset() {
+    fileprivate func reset() {
         // Clear visuals and cancel request if there are anything pending by cell reusability
         name.text = nil
         imageView.image = nil
         request?.cancel()
     }
     
-    private func populate() {
+    fileprivate func populate() {
         // First set the artist name
         name.text = artist.name
 

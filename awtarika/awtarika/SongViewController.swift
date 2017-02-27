@@ -27,7 +27,7 @@ class SongViewController: UIViewController {
     var request: Request?
     var song: Song!
     
-    var gaScreenCategory = "Song"
+    let gaScreenCategory = "Song"
     var gaScreenID: String!
 
     override func viewDidLoad() {
@@ -41,14 +41,14 @@ class SongViewController: UIViewController {
         if song.description != nil {
             
             // Custom hashtags to allow special chars in the string. Default hashtag doesn't allow symbols.
-            let customHashtag = ActiveType.Custom(pattern: "#(\\S+)")
+            let customHashtag = ActiveType.custom(pattern: "#(\\S+)")
             songDescription.enabledTypes = [customHashtag]
             songDescription.customColor[customHashtag] = songDescription.hashtagColor
             songDescription.customSelectedColor[customHashtag] = songDescription.hashtagSelectedColor
             songDescription.handleCustomTap(for: customHashtag) { element in
                 
                 // Segue to the hashtag VC on click
-                let hashtagVC = self.storyboard?.instantiateViewControllerWithIdentifier("HashtagView") as! HashtagTableViewController
+                let hashtagVC = self.storyboard?.instantiateViewController(withIdentifier: "HashtagView") as! HashtagTableViewController
                 hashtagVC.hashtag = element
                 self.navigationController?.pushViewController(hashtagVC, animated: true)
             }
@@ -74,18 +74,18 @@ class SongViewController: UIViewController {
         adBannerView.rootViewController = self
         let request = GADRequest()
         request.testDevices = [kDFPSimulatorID, Constants.AdMob.TestDeviceAnasIPhone4S]
-        adBannerView.loadRequest(request)
+        adBannerView.load(request)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
         // Google Analytics - Screen View
-        let name = "\(gaScreenCategory): \(gaScreenID)"
+        let name = "\(gaScreenCategory): \(gaScreenID!)"
         GoogleAnalyticsManager.screenView(name: name)
     }
     
-    @IBAction func share(sender: UIBarButtonItem) {
+    @IBAction func share(_ sender: UIBarButtonItem) {
         // Google Analytics - Event
         GoogleAnalyticsManager.event(category: gaScreenCategory, action: "Share", label: gaScreenID)
         
@@ -93,23 +93,23 @@ class SongViewController: UIViewController {
         if let url = song.url {
             let shareVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
             shareVC.popoverPresentationController?.barButtonItem = sender
-            self.presentViewController(shareVC, animated: true, completion: nil)
+            self.present(shareVC, animated: true, completion: nil)
         } else {
-            LELog.log("\(self) share(): Song \(song.id) doesn't have a url.")
+            LELog.log("\(self) share(): Song \(song.id) doesn't have a url." as NSObject!)
         }
     }
 
-    @IBAction func showPlayer(sender: AnyObject) {
+    @IBAction func showPlayer(_ sender: AnyObject) {
         // Google Analytics - Event
         GoogleAnalyticsManager.event(category: gaScreenCategory, action: "Play", label: gaScreenID)
         
         // Show popup player VC
-        let popupContentVC = storyboard?.instantiateViewControllerWithIdentifier("PlayerView") as! PlayerViewController
+        let popupContentVC = storyboard?.instantiateViewController(withIdentifier: "PlayerView") as! PlayerViewController
         popupContentVC.song = song
-        navigationController?.presentPopupBarWithContentViewController(popupContentVC, animated: true, completion: nil)
+        navigationController?.presentPopupBar(withContentViewController: popupContentVC, animated: true, completion: nil)
     }
     
-    private func showImage() {
+    fileprivate func showImage() {
         // GUARD: Does song have an image?
         guard let imageURL = song.imageURL else {
             return

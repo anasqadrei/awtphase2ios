@@ -21,8 +21,8 @@ class PhotosDataManager {
         preferredMemoryUsageAfterPurge: 60 * 1024 * 1024
     )
     
-    func getNetworkImage(urlString: String, completion: (UIImage -> Void)) -> (Request) {
-        return Alamofire.request(.GET, urlString).responseImage { (response) -> Void in
+    func getNetworkImage(_ urlString: String, completion: @escaping ((UIImage) -> Void)) -> (Request) {
+        return Alamofire.request(urlString).responseImage { (response) -> Void in
             
             // GUARD: Does image even exist?
             guard let image = response.result.value else {
@@ -37,13 +37,13 @@ class PhotosDataManager {
         }
     }
     
-    func cacheImage(image: Image, urlString: String) {
+    func cacheImage(_ image: Image, urlString: String) {
         // Add to cache
-        photoCache.addImage(image, withIdentifier: urlString)
+        photoCache.add(image, withIdentifier: urlString)
     }
     
-    func cachedImage(urlString: String) -> Image? {
+    func cachedImage(_ urlString: String) -> Image? {
         // Get from cached
-        return photoCache.imageWithIdentifier(urlString)
+        return photoCache.image(withIdentifier: urlString)
     }
 }

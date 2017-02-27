@@ -19,7 +19,7 @@ class HashtagTableViewController: UITableViewController {
     var lastFetchedPage = 0
     var fetching = false
     
-    var gaScreenCategory = "Hashtag"
+    let gaScreenCategory = "Hashtag"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,19 +33,19 @@ class HashtagTableViewController: UITableViewController {
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
         // Google Analytics - Screen View
-        let name = "\(gaScreenCategory): \(hashtag)"
+        let name = "\(gaScreenCategory): \(hashtag!)"
         GoogleAnalyticsManager.screenView(name: name)
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return songsList.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // For scrolling purposes, fetch more songs if:
         //   Not busy fetching
         //   Still more pages to fetch
@@ -55,46 +55,46 @@ class HashtagTableViewController: UITableViewController {
         }
         
         // Build the cell
-        let cell = tableView.dequeueReusableCellWithIdentifier("DetailedSongCell", forIndexPath: indexPath) as! DetailedSongTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DetailedSongCell", for: indexPath) as! DetailedSongTableViewCell
         cell.configure(songsList[indexPath.row])
         return cell
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Assign the song of the destination VC
         if segue.identifier == "HashtagToSong", let songCell = sender as! DetailedSongTableViewCell? {
-            let songVC = segue.destinationViewController as! SongViewController
+            let songVC = segue.destination as! SongViewController
             songVC.song = songCell.song
         }
     }
     
-    private func getSongsList(page: Int) {
+    fileprivate func getSongsList(_ page: Int) {
         // Set busy fetching
         configureUI(true)
         
         // Create request
-        let hashtagText = hashtag.stringByReplacingOccurrencesOfString("#", withString: "")
-        let encodedHashtag = hashtagText.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())!
+        let hashtagText = hashtag.replacingOccurrences(of: "#", with: "")
+        let encodedHashtag = hashtagText.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
         let url = "\(Constants.URLs.Host)/hashtag/\(encodedHashtag)"
         let parameters = [
             "page": "\(page)"
         ]
         let headers = ["Accept": "application/json"]
-        Alamofire.request(.GET, url, parameters: parameters, headers: headers)
+        Alamofire.request(url, method: .get, parameters: parameters, headers: headers)
             .validate()
             .responseJSON { response in
 
                 // GUARD: Data parsed to JSON?
-                guard let parsedResult = response.result.value else {
-                    LELog.log("\(self) Hashtag \(self.hashtag) getSongsList(\(page)): Couldn't serialize response.")
+                guard let parsedResult = response.result.value as? [String: Any] else {
+                    LELog.log("\(self) Hashtag \(self.hashtag) getSongsList(\(page)): Couldn't serialize response." as NSObject!)
                     self.configureUI(false)
                     return
                 }
                 
                 // GUARD: Are the "photos" and "photo" keys in our result?
                 guard let parsedSongsList = parsedResult["songsList"] as? [[String:AnyObject]],
-                    totalPages = parsedResult["totalPages"] as? Int else {
-                        LELog.log("\(self) Hashtag \(self.hashtag) getSongsList(\(page)): Couldn't find keys 'songsList' and 'totalPages' in \(parsedResult)")
+                    let totalPages = parsedResult["totalPages"] as? Int else {
+                        LELog.log("\(self) Hashtag \(self.hashtag) getSongsList(\(page)): Couldn't find keys 'songsList' and 'totalPages' in \(parsedResult)" as NSObject!)
                         self.configureUI(false)
                         return
                 }
@@ -106,7 +106,7 @@ class HashtagTableViewController: UITableViewController {
                     if let song = Song.createSong(parsedSong) {
                         self.songsList.append(song)
                     } else {
-                        LELog.log("\(self) Hashtag \(self.hashtag) getSongsList(\(page)): A song couldn't be serialized.")
+                        LELog.log("\(self) Hashtag \(self.hashtag) getSongsList(\(page)): A song couldn't be serialized." as NSObject!)
                     }
                 }
                 
@@ -120,10 +120,10 @@ class HashtagTableViewController: UITableViewController {
         }
     }
     
-    private func configureUI(busy: Bool) {
+    fileprivate func configureUI(_ busy: Bool) {
         // Set UI and fetching to busy or not
         fetching = busy
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = busy
+        UIApplication.shared.isNetworkActivityIndicatorVisible = busy
     }
 
 }

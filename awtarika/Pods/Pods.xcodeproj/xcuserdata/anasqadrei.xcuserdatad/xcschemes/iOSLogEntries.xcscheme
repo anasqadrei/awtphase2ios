@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '8EAA23A2E2B57CDCD508CD43176D159B'
+               BlueprintIdentifier = '58E156FB1851C8A18328E0A4D37E4696'
                BlueprintName = 'iOSLogEntries'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'iOSLogEntries.framework'>

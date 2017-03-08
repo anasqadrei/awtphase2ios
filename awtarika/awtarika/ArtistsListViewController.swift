@@ -100,7 +100,7 @@ class ArtistsListViewController: UICollectionViewController {
                     return
                 }
                 
-                // GUARD: Are the "photos" and "photo" keys in our result?
+                // GUARD: Are the "artistsList" and "totalPages" keys in our result?
                 guard let parsedArtistsList = parsedResult["artistsList"] as? [[String:AnyObject]],
                     let totalPages = parsedResult["totalPages"] as? Int else {
                         LELog.log("\(self) getArtistsList(\(page),\(sort)): Couldn't find keys 'artistsList' and 'totalPages' in \(parsedResult)" as NSObject!)

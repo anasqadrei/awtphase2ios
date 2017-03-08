@@ -91,7 +91,7 @@ class HashtagTableViewController: UITableViewController {
                     return
                 }
                 
-                // GUARD: Are the "photos" and "photo" keys in our result?
+                // GUARD: Are the "songsList" and "totalPages" keys in our result?
                 guard let parsedSongsList = parsedResult["songsList"] as? [[String:AnyObject]],
                     let totalPages = parsedResult["totalPages"] as? Int else {
                         LELog.log("\(self) Hashtag \(self.hashtag) getSongsList(\(page)): Couldn't find keys 'songsList' and 'totalPages' in \(parsedResult)" as NSObject!)

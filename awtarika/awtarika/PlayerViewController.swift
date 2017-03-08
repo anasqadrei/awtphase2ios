@@ -55,15 +55,15 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
         audioPlayer.delegate = self
 
         // Bar custom design
-        LNPopupBar.appearance(whenContainedInInstancesOf: [UINavigationController.self]).barStyle = .black
-        LNPopupBar.appearance(whenContainedInInstancesOf: [UINavigationController.self]).titleTextAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 16)]
+        LNPopupBar.appearance(whenContainedInInstancesOf: [UITabBarController.self]).barStyle = .black
+        LNPopupBar.appearance(whenContainedInInstancesOf: [UITabBarController.self]).titleTextAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 16)]
         
         // Prepare bar buttons
         // Spinner
-        let activityIndicatorView = UIActivityIndicatorView()
+        let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .white)
         activityIndicatorView.startAnimating()
         spinner = UIBarButtonItem(customView: activityIndicatorView)
-        
+
         // Play
         play = UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(barActionPlay))
         play.accessibilityLabel = NSLocalizedString("Play", comment: "")
@@ -129,7 +129,6 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
         ]
         let headers = ["Accept": "application/json"]
         
-        print("here")
         Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
             .responseJSON { response in
                 // result of the call doesn't matter much
@@ -173,6 +172,11 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
             popupItem.leftBarButtonItems = [ stop ]
             if isViewLoaded {
                 togglePlayPauseButton.setImage(UIImage(named: "playerClose"), for: UIControlState())
+            }
+            
+            // Report failure
+            if let gaScreenID = gaScreenID {
+                LELog.log("\(self) audioPlayer failed state: \(gaScreenID) Couldn't load song." as NSObject!)
             }
         }
         
@@ -281,8 +285,8 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
                         UIApplication.shared.isNetworkActivityIndicatorVisible = false
                         return
                     }
-                    
-                    // GUARD: Are the "photos" and "photo" keys in our result?
+
+                    // GUARD: Is the "url" key in our result?
                     guard var songURL = URL(string: (parsedResult["url"] as? String)!) else {
                         LELog.log("\(self) playSong(\(self.song.id)): Couldn't find key 'url' in \(parsedResult)" as NSObject!)
                         UIApplication.shared.isNetworkActivityIndicatorVisible = false
@@ -309,10 +313,11 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
     }
 
     func dismissVC() {
-        // Stop song from playing
+        // Stop song from playing (pausing first to minimize iphone4s problem. doesn't solve it though)
+        audioPlayer.pause()
         audioPlayer.stop()
-        
-        // Remove the only item to save bandwidth (wasn't really tested)
+
+        // Remove the only item to save bandwidth (wasn't really tested)(.stop might actually removes it)
         if (audioPlayer.items != nil) {
             audioPlayer.removeItem(at: 0)
         }

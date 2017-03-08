@@ -106,7 +106,7 @@ class SongViewController: UIViewController {
         // Show popup player VC
         let popupContentVC = storyboard?.instantiateViewController(withIdentifier: "PlayerView") as! PlayerViewController
         popupContentVC.song = song
-        navigationController?.presentPopupBar(withContentViewController: popupContentVC, animated: true, completion: nil)
+        tabBarController?.presentPopupBar(withContentViewController: popupContentVC, animated: true, completion: nil)
     }
     
     fileprivate func showImage() {

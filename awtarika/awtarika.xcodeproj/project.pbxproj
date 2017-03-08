@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		6A3FCD44152C2C3B1E91A84A /* Pods_awtarika.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FD67ACDF1646C48184A4E1E /* Pods_awtarika.framework */; };
+		E407F8B61E64E4D5005C8320 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E407F8B51E64E4D5005C8320 /* SearchViewController.swift */; };
+		E407F8B81E6617C2005C8320 /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E407F8B71E6617C2005C8320 /* SearchResult.swift */; };
+		E407F8BA1E663461005C8320 /* SearchResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E407F8B91E663461005C8320 /* SearchResultTableViewCell.swift */; };
 		E40B54E11CBC709800A2F414 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40B54E01CBC709800A2F414 /* AppDelegate.swift */; };
 		E40B54E61CBC709800A2F414 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E40B54E41CBC709800A2F414 /* Main.storyboard */; };
 		E40B54E81CBC709800A2F414 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E40B54E71CBC709800A2F414 /* Assets.xcassets */; };
@@ -56,6 +59,9 @@
 		3EFEC21EA20089078BD49B97 /* Pods-awtarika.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-awtarika.debug.xcconfig"; path = "Pods/Target Support Files/Pods-awtarika/Pods-awtarika.debug.xcconfig"; sourceTree = "<group>"; };
 		4FD67ACDF1646C48184A4E1E /* Pods_awtarika.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_awtarika.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEAF1DA3412B74D6CD7864F5 /* Pods-awtarika.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-awtarika.release.xcconfig"; path = "Pods/Target Support Files/Pods-awtarika/Pods-awtarika.release.xcconfig"; sourceTree = "<group>"; };
+		E407F8B51E64E4D5005C8320 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		E407F8B71E6617C2005C8320 /* SearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
+		E407F8B91E663461005C8320 /* SearchResultTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewCell.swift; sourceTree = "<group>"; };
 		E40B54DD1CBC709800A2F414 /* awtarika.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = awtarika.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E40B54E01CBC709800A2F414 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E40B54E51CBC709800A2F414 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -166,6 +172,7 @@
 				E40B54E01CBC709800A2F414 /* AppDelegate.swift */,
 				E40B55121CBF264300A2F414 /* Artist.swift */,
 				E46DA3141D751977001D4EBC /* Song.swift */,
+				E407F8B71E6617C2005C8320 /* SearchResult.swift */,
 				E40B54E41CBC709800A2F414 /* Main.storyboard */,
 				E40B55101CBCB15E00A2F414 /* ArtistsListViewController.swift */,
 				E49E535C1D6A85AF000472F8 /* ArtistsCollectionViewCell.swift */,
@@ -175,6 +182,8 @@
 				E4608B191D88E34500AA65A9 /* PlayerViewController.swift */,
 				E46AA9A31DA1DE9800EBED48 /* HashtagTableViewController.swift */,
 				E46AA9A51DA1EEFB00EBED48 /* DetailedSongTableViewCell.swift */,
+				E407F8B51E64E4D5005C8320 /* SearchViewController.swift */,
+				E407F8B91E663461005C8320 /* SearchResultTableViewCell.swift */,
 				E40B54E71CBC709800A2F414 /* Assets.xcassets */,
 				E4B9EE6C1DA7C47900578171 /* Launch Screen.storyboard */,
 				E40B54EC1CBC709800A2F414 /* Info.plist */,
@@ -417,7 +426,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E407F8B61E64E4D5005C8320 /* SearchViewController.swift in Sources */,
+				E407F8BA1E663461005C8320 /* SearchResultTableViewCell.swift in Sources */,
 				E40B55111CBCB15E00A2F414 /* ArtistsListViewController.swift in Sources */,
+				E407F8B81E6617C2005C8320 /* SearchResult.swift in Sources */,
 				E40B55131CBF264300A2F414 /* Artist.swift in Sources */,
 				E49E535D1D6A85AF000472F8 /* ArtistsCollectionViewCell.swift in Sources */,
 				E48EDC4A1DA5BDDC00ACBE1F /* GoogleAnalyticsManager.swift in Sources */,
@@ -589,7 +601,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = awtarika/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.awtarika.ios.app.development;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -612,7 +624,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = awtarika/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.awtarika.ios.app.development;
 				PRODUCT_NAME = "$(TARGET_NAME)";

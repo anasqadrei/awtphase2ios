@@ -285,8 +285,8 @@ class PlayerViewController: UIViewController, AudioPlayerDelegate {
                         UIApplication.shared.isNetworkActivityIndicatorVisible = false
                         return
                     }
-                    
-                    // GUARD: Are the "photos" and "photo" keys in our result?
+
+                    // GUARD: Is the "url" key in our result?
                     guard let songURL = URL(string: (parsedResult["url"] as? String)!) else {
                         LELog.log("\(self) playSong(\(self.song.id)): Couldn't find key 'url' in \(parsedResult)" as NSObject!)
                         UIApplication.shared.isNetworkActivityIndicatorVisible = false

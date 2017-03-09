@@ -87,7 +87,6 @@
 		E46AA9A51DA1EEFB00EBED48 /* DetailedSongTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedSongTableViewCell.swift; sourceTree = "<group>"; };
 		E46DA3141D751977001D4EBC /* Song.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
 		E46DA3161D752265001D4EBC /* SongTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongTableViewCell.swift; sourceTree = "<group>"; };
-		E47E15BA1E5D209F00B82E30 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		E48EDC491DA5BDDC00ACBE1F /* GoogleAnalyticsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleAnalyticsManager.swift; sourceTree = "<group>"; };
 		E49E535C1D6A85AF000472F8 /* ArtistsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistsCollectionViewCell.swift; sourceTree = "<group>"; };
 		E49E53611D6FBCFB000472F8 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -189,7 +188,6 @@
 				E4608B0D1D7CFF6800AA65A9 /* PhotosDataManager.swift */,
 				E48EDC491DA5BDDC00ACBE1F /* GoogleAnalyticsManager.swift */,
 				E49E53611D6FBCFB000472F8 /* Constants.swift */,
-				E425C1A51DA3837A006D1F80 /* BridgingHeader.h */,
 			);
 			path = awtarika;
 			sourceTree = "<group>";
@@ -299,6 +297,7 @@
 					};
 					E40B54FB1CBC709800A2F414 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = X37C3M24TT;
 						LastSwiftMigration = 0820;
 						TestTargetID = E40B54DC1CBC709800A2F414;
 					};

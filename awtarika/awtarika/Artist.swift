@@ -39,7 +39,7 @@ class Artist {
         if let url = parsedArtist["url"] as? String {
             artist.url = url
         }
-        if let imageURL = parsedArtist["image"] as? String {
+        if let imageURL = parsedArtist["defaultImage"] as? String {
             artist.imageURL = imageURL
         }
         if let totalSongsPages = parsedArtist["totalSongsPages"] as? Int {

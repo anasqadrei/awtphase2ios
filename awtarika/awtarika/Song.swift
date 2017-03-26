@@ -59,7 +59,7 @@ class Song {
         if let desc = parsedSong["desc"] as? String {
             song.description = desc
         }
-        if let imageURL = parsedSong["image"] as? String {
+        if let imageURL = parsedSong["defaultImage"] as? String {
             song.imageURL = imageURL
         }
         if let durationDesc = parsedSong["durationDesc"] as? String {

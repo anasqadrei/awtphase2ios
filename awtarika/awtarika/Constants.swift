@@ -11,7 +11,7 @@ import Foundation
 struct Constants {
     
     struct URLs {
-        static let Host = "http://www.awtarika.com"
+        static let Host = "https://www.awtarika.com"
     }
     
     struct AdMob {
